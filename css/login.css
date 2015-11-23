@@ -1,0 +1,74 @@
+
+#top-mast{
+	height: 30px;
+	background-color: rgba(0,0,0,0.8);
+}
+
+#backgr{
+	background-image: url('../images/background.jpg');
+	min-height: 588px;
+}
+
+#logo-hold{
+	margin-top: 20px;
+}
+
+#botface{color:#4D9EE1; height:80px;}
+
+#login-pane-1, #login-pane-2{
+	
+	background-color: rgba(0,0,0,0.7);
+	margin-top:10px;
+	margin-left: 500px;
+	border-radius:5px; 
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px; 
+	color: #fff;
+
+}
+
+#login-pane-2{
+	border-radius:5px; 
+	border-top-right-radius: 0px;
+	border-top-left-radius: 0px; 
+	margin-top:2px;
+	background-color: rgba(0,0,0,0.8);
+
+	
+}
+
+
+#bottom-mast{
+	height: 35px;
+	color: #fff;
+	padding-top: 5px;
+	padding-left: 350px;
+	background-color: rgba(0,0,0,0.8);
+}
+
+#holder,#pass {
+    background-color:rgba(0, 0, 0, 0);
+    color:#F25757;
+    border: none;
+    outline:none;
+    height:20px;
+    margin-left: -12px;
+	font-size:14px;
+	width:98%;
+}
+
+input#clicker{
+border: none;
+overflow: hidden;
+background-color: Transparent;
+background-image: url('../images/left-click.png');
+background-repeat: no-repeat;
+background-position: right;
+margin-left: 1px;
+margin-bottom: 10px;
+
+}
+
+.p-handle{
+	margin-top: -18px;
+}
