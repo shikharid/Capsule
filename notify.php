@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,6 +38,8 @@
 		</div>
 	</div>
 
+ 
+ <?php error_reporting(0); if(isset($_SESSION['Userid'])) { ?>
 
 	<div class="row" id='backgr'>
       <div class="col-md-12" id='screen' >
@@ -45,6 +49,7 @@
             <input type='button' id='but-sea' onClick='find();' title="Search">
             <input type='button' id='but-ref' onClick='flush();' title="Reset">
             <input type='button' id='but-sub' onClick='submit();' title="Submit">
+
             
           </div>
         </div>
@@ -91,14 +96,40 @@
         </div>
         <hr style='margin-top:-2px;'>
         <div id='console-io'>@Botfather: This area is for console messages | Under test by TM</div>
+        
         <div id="cmlogo" >
           <img class="bottom" src="images/mini-bw.png" />
           <img class="top" src="images/mini-col.png" />
         </div>
+        <div style='margin-top:-533px; margin-left: 1100px;'>  <a href="dashboard.php"><img src="images/close.png"></a> </div> <!-- back button buggy !-->
 
        </div>
 
   </div>
+
+    <?php } else { ?>
+
+
+
+    <div class="row" id='backgr'>
+      <div class="row" id='active-frame'>
+        
+
+          <div id="cmlogo2" ><img class="bottom" src="images/capsulebot.png" /><img class="top" src="images/capsulebot2.png" /></div>
+          <div style='margin-left: 39%; margin-top:300px;'><h2>Session Expired :( </h2></div>
+          <div style='text-algin: center; margin-left: 46%;'><h6><a href="index.php">Home</a></h6></div>
+     
+
+      </div>
+    </div>
+
+
+
+
+<?php } ?>
+
+
+
 
 	<div class="row">
 		<div class="col-md-12-foot" id='bottom-mast'>

@@ -105,4 +105,6 @@ margin-bottom: 10px;
 
 }
 
+/*DONOT EDIT*/#cmlogo{ margin-left: 38%; }#cmlogo img{position:absolute;  -webkit-transition: opacity 1s ease-in-out; -moz-transition: opacity 1s ease-in-out; -o-transition: opacity 1s ease-in-out; transition: opacity 1s ease-in-out;}#cmlogo img.top:hover{opacity:0;}@keyframes cmlogoFadeInOut{0%{opacity:1;}45%{opacity:1;}55%{opacity:0;}100%{opacity:0;}}#cmlogo img.top{animation-name: cmlogoFadeInOut;animation-timing-function: ease-in-out;animation-iteration-count: infinite;animation-duration: 5s;animation-direction: alternate;}
+
 

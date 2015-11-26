@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Capsule | Group #54</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -25,19 +18,22 @@
       
 		</div>
 	</div>
+          
+
 
 	<div class="row" id='backgr'>
     <div class="col-md-4 col-md-offset-5" id='logo-hold'><img src="images/logo-small.png"></div>
     <div class="col-md-3 col-md-offset-4" id='login-pane-1'>
-       <div class="col-md-12-elem" id='botface'><p style=' color:#4D9EE1'>@Botfather: Hi! Please enter your username in the command box below.</p>  <div class='p-handle'></div>
+       <div class="col-md-12-elem" id='botface'><p style=' color:#4D9EE1'>@Capsule-Bot: Hi! Enter your username in the command box below.</p>  <div class='p-handle'></div>
        </div>
     </div>
+
     <div class="col-md-3 col-md-offset-4" id='login-pane-2'>
 
        <div class="col-md-12">
         <div id='main-form'>
-          <form name='login' onsubmit='passw();' action='gateway.php' method=POST>
-            <input type='password' id='holder'> <input type="submit" value='' id='clicker'>
+          <form name='login' onsubmit='passw();' action='dashboard.php' method=POST>
+            <input type='password' id='holder' name='pwd'> <input type="submit" value='' id='clicker'>
           </form>
             </div>
         </div>
@@ -57,7 +53,7 @@
 <script>
  $(document).ready(function(){
       $(".p-handle").typed({
-        strings: ["<br> @Botfather: Drop in your password now."],
+        strings: ["<br> @Capsule-Bot: Enter your password."],
         startDelay: 1000,
         showCursor: false,
         contentType: 'html',

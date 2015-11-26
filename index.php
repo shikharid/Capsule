@@ -1,10 +1,17 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
+
+                          <?php require 'php_includes/db_conx.php';?>
+                         
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Capsule | Group #54</title>
+ 
+                          <?php if(isset($_POST['email'])) {$_SESSION["email"] = $_POST['email']; require "login.php";} else { ?>
+
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -18,7 +25,7 @@
   </head>
 
   <body>
-
+        
     <div class="container-fluid">
 	<div class="row no-gutter" >
 		<div class="col-md-12"  id='top-mast'>
@@ -29,14 +36,14 @@
 	<div class="row" id='backgr'>
     <div class="col-md-4 col-md-offset-5" id='logo-hold'><img src="images/logo-small.png"></div>
     <div class="col-md-3 col-md-offset-4" id='login-pane-1'>
-       <div class="col-md-12-elem" id='botface'><p style='text-align: center; color:#fff'>Please wait while the bot arrives.</p></div>
+       <div class="col-md-12-elem" id='botface'><p style='text-align: center; color:#fff'>Please wait while the bot loads</p></div>
     </div>
     <div class="col-md-3 col-md-offset-4" id='login-pane-2'>
 
        <div class="col-md-12">
         <div id='main-form'>
-          <form name='login' onsubmit='passw();' action='login.php' method=POST>
-            <input type='text' id='holder'> <input type="submit" value='' id='clicker'>
+          <form name='login' onsubmit='passw();' action='index.php' method=POST>
+            <input type='text' id='holder' name='email'> <input type="submit" value='' id='clicker'>
           </form>
             </div>
         </div>
@@ -56,7 +63,7 @@
 <script>
  $(document).ready(function(){
       $(".col-md-12-elem").typed({
-        strings: ["@Botfather: ^1000 Hi! Please enter your username in the command box below."],
+        strings: ["@Capsule-Bot: ^1000 Hi! Enter your username in the command box below."],
         startDelay: 3000,
         showCursor: false,
         contentType: 'text',
@@ -64,7 +71,8 @@
       });
 });
 </script>
-
+                               
    
   </body>
 </html>
+ <?php } ?>
