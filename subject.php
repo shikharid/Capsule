@@ -1,3 +1,5 @@
+
+
 <?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,13 +13,90 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/overrides.css">
-    <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="css/subject.css">
 
     <script src="js/jquery.js"></script>
     <script src="js/typed.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
+
+<script>
+  $(function() {
+    $( "#accordion" ).accordion({
+      event: "click hoverintent"
+    });
+  });
+ 
+  /*
+   * hoverIntent | Copyright 2011 Brian Cherne
+   * http://cherne.net/brian/resources/jquery.hoverIntent.html
+   * modified by the jQuery UI team
+   */
+  $.event.special.hoverintent = {
+    setup: function() {
+      $( this ).bind( "mouseover", jQuery.event.special.hoverintent.handler );
+    },
+    teardown: function() {
+      $( this ).unbind( "mouseover", jQuery.event.special.hoverintent.handler );
+    },
+    handler: function( event ) {
+      var currentX, currentY, timeout,
+        args = arguments,
+        target = $( event.target ),
+        previousX = event.pageX,
+        previousY = event.pageY;
+ 
+      function track( event ) {
+        currentX = event.pageX;
+        currentY = event.pageY;
+      };
+ 
+      function clear() {
+        target
+          .unbind( "mousemove", track )
+          .unbind( "mouseout", clear );
+        clearTimeout( timeout );
+      }
+ 
+      function handler() {
+        var prop,
+          orig = event;
+ 
+        if ( ( Math.abs( previousX - currentX ) +
+            Math.abs( previousY - currentY ) ) < 7 ) {
+          clear();
+ 
+          event = $.Event( "hoverintent" );
+          for ( prop in orig ) {
+            if ( !( prop in event ) ) {
+              event[ prop ] = orig[ prop ];
+            }
+          }
+          // Prevent accessing the original event since the new event
+          // is fired asynchronously and the old event is no longer
+          // usable (#6028)
+          delete event.originalEvent;
+ 
+          target.trigger( event );
+        } else {
+          previousX = currentX;
+          previousY = currentY;
+          timeout = setTimeout( handler, 100 );
+        }
+      }
+ 
+      timeout = setTimeout( handler, 100 );
+      target.bind({
+        mousemove: track,
+        mouseout: clear
+      });
+    }
+  };
+  </script>
+
+
+
   </head>
                   
                   <?php
@@ -97,46 +176,61 @@
               </ul>
             </li>
         </ul>
-        
+
         <div class="col-md-12" id='page-cont'>
           <div><fieldset>
-            <legend>Updates</legend>
+            <legend>Subject Name</legend>
           </fieldset>
-          <?php  echo $thumb;?>
-          <p>1. Added Subjects Tab | 2. Added Logout session | 3. Added Scorecard</p>
+          <div id="accordion">
+  <h3>Question 1</h3>
+  <div>
+    <p>
+    	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras libero lorem, mollis at commodo sed, malesuada at lacus. Maecenas consectetur eleifend tempor. Nullam consequat consectetur ipsum, id venenatis dui fringilla in. Suspendisse ut metus eu diam pretium ultricies. Duis gravida velit risus, in commodo nulla fringilla eget. In ac massa.
+
+   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras libero lorem, mollis at commodo sed, malesuada at lacus. Maecenas consectetur eleifend tempor. Nullam consequat consectetur ipsum, id venenatis dui fringilla in. Suspendisse ut metus eu diam pretium ultricies. Duis gravida velit risus, in commodo nulla fringilla eget. In ac massa.
+    </p>
+  </div>
+  <h3>Question 2</h3>
+  <div>
+    <p>
+    Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+    purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+    velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+    suscipit faucibus urna.
+    </p>
+  </div>
+  <h3>Question 3</h3>
+  <div>
+    <p>
+    Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+    Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+    ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+    lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+    </p>
+    <ul>
+      <li>List item one</li>
+      <li>List item two</li>
+      <li>List item three</li>
+    </ul>
+  </div>
+  <h3>Question 4</h3>
+  <div>
+    <p>
+    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+    et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+    faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+    mauris vel est.
+    </p>
+    <p>
+    Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+    inceptos himenaeos.
+    </p>
+  </div>
+</div>
+
           </div>
-          <br>
-          <div>
-           <fieldset>
-            <legend>Subjects</legend>
-          </fieldset>
-
-              <div id='subjectpanel' style='margin-left: 5%;'>
-
-                        <a href="subject.php" class="a-btn">
-                            <span class="a-btn-text">Subject 1</span> 
-                            <span class="a-btn-slide-text"><img src="images/updated.png" title="Last Updated"> 28-11-2015</span>
-                            <span class="a-btn-icon-right"><span></span></span>
-                      </a>
-                       <a href="subject.php" class="a-btn">
-                            <span class="a-btn-text">Subject 2</span> 
-                            <span class="a-btn-slide-text"><img src="images/updated.png" title="Last Updated"> 27-11-2015</span>
-                            <span class="a-btn-icon-right"><span></span></span>
-                      </a>
-                       <a href="subject.php" class="a-btn">
-                            <span class="a-btn-text">Subject 3</span> 
-                            <span class="a-btn-slide-text"><img src="images/updated.png" title="Last Updated"> 26-11-2015</span>
-                            <span class="a-btn-icon-right"><span></span></span>
-                      </a>
-                       <a href="subject.php" class="a-btn">
-                            <span class="a-btn-text">Subject 4</span> 
-                            <span class="a-btn-slide-text"><img src="images/updated.png" title="Last Updated"> 25-11-2015</span>
-                            <span class="a-btn-icon-right"><span></span></span>
-                      </a>
-
-               
-              </div>
-          </div>
+         
         </div>
       </div>
     </div>

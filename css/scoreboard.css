@@ -1,93 +1,71 @@
-.a-btn{
-    background: #3cb35a;
-  border: 1px solid #4D9EE1;
-    border-color: #4D9EE1 #4D9EE1 #4D9EE1;
-    border-color: #4D9EE1 #4D9EE1 #4D9EE1;
-    box-shadow: 0 1px 1px #d3d3d3, inset 0 1px 0 #4D9EE1;  
-    padding: 0px 80px 0px 10px;
-  height: 38px;
-  display: inline-block;
-  position: relative;
-  border-radius: 4px;
-  float: left;
-  margin: 10px;
-  overflow: hidden;
-  transition: all 0.3s linear;
-}
-.a-btn-text{
-  padding-top: 5px;
-  display: block;
-  font-size: 18px;
-  white-space: nowrap;
-  color: #000000;
-  transition: all 0.3s linear;
-}
-.a-btn-slide-text{
-  position:absolute;
-  top: 35px;
-  left: 0px;
-  width: auto;
-  right: 52px;
-  height: 0px;
-  background: #ff5654 ;
-  color: #000000;
-  font-size: 13px;
-  white-space: nowrap;
-  font-family: Georgia, serif;
-  font-style: italic;
-  text-indent: 15px;
-  overflow: hidden;
-  line-height: 30px;
-  box-shadow: 
-    -1px 0px 1px rgba(255,255,255,0.4), 
-    1px 1px 1px rgba(0,0,0,0.5) inset;
-  transition: height 0.3s linear;
-}
-.a-btn-icon-right{
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  height: 100%;
-  width: 52px;
-  border-left: 1px solid #4D9EE1;
-  box-shadow: 1px 0px 1px rgba(255,255,255,0.4) inset;
-}
-.a-btn-icon-right span{
-  width: 38px;
-  height: 38px;
-  opacity: 0.7;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin: -20px 0px 0px -20px;
-  background: transparent url(../images/clip-1.png) no-repeat 50% 55%;
-    transition: all 0.3s linear;
-}
-
-.a-btn:hover{
-  height: 65px;
-  box-shadow: 0px 1px 1px rgba(255,255,255,0.8) inset, 1px 1px 5px rgba(0,0,0,0.4); 
-}
-.a-btn:hover .a-btn-text{
-  text-shadow: 0px 1px 1px rgba(0,0,0,0.2);
-  color: #000000;
-}
-.a-btn:hover .a-btn-slide-text{
-  height: 30px;
-}
-.a-btn:hover .a-btn-icon-right span{
-  opacity: 1;
-  transform: rotate(-45deg);
-}
+#table-con{margin-left: 30px; }
 
 
-.a-btn:active {
-  position:relative;
-  top:1px;
-  background: linear-gradient(top, #fec354 0%,#fecd61 100%); /* W3C */
-    border-color: #d29a3a #cc9436 #c89133;
-    text-shadow: 0 1px 0 #fee1a0;
-    box-shadow: 0 1px 1px #d4d4d4, inset 0 1px 0 #fed17e;  
+.zebra td, .zebra th {
+    padding: 10px;
+    border-bottom: 1px solid #f2f2f2;    
+}
+
+.zebra tbody tr:nth-child(even) {
+    background: #f5f5f5;
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
+    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;  
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
+}
+
+.zebra th {
+    text-align: left;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5); 
+    border-bottom: 1px solid #ccc;
+    background-color: #eee;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#eee));
+    background-image: -webkit-linear-gradient(top, #f5f5f5, #eee);
+    background-image:    -moz-linear-gradient(top, #f5f5f5, #eee);
+    background-image:     -ms-linear-gradient(top, #f5f5f5, #eee);
+    background-image:      -o-linear-gradient(top, #f5f5f5, #eee); 
+    background-image:         linear-gradient(top, #f5f5f5, #eee);
+}
+
+.zebra th:first-child {
+    -moz-border-radius: 6px 0 0 0;
+    -webkit-border-radius: 6px 0 0 0;
+    border-radius: 6px 0 0 0;  
+}
+
+.zebra th:last-child {
+    -moz-border-radius: 0 6px 0 0;
+    -webkit-border-radius: 0 6px 0 0;
+    border-radius: 0 6px 0 0;
+}
+
+.zebra th:only-child{
+    -moz-border-radius: 6px 6px 0 0;
+    -webkit-border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;
+}
+
+.zebra tfoot td {
+    border-bottom: 0;
+    border-top: 1px solid #fff;
+    background-color: #f1f1f1;  
+}
+
+.zebra tfoot td:first-child {
+    -moz-border-radius: 0 0 0 6px;
+    -webkit-border-radius: 0 0 0 6px;
+    border-radius: 0 0 0 6px;
+}
+
+.zebra tfoot td:last-child {
+    -moz-border-radius: 0 0 6px 0;
+    -webkit-border-radius: 0 0 6px 0;
+    border-radius: 0 0 6px 0;
+}
+
+.zebra tfoot td:only-child{
+    -moz-border-radius: 0 0 6px 6px;
+    -webkit-border-radius: 0 0 6px 6px
+    border-radius: 0 0 6px 6px
 }
 
 
@@ -107,13 +85,7 @@
 
 
 
-
-
-
-
-
-
-/*boxed*/
+/* boxed */
 #active-frame{
     margin-top: 15px;
     padding-left: 10px;
