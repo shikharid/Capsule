@@ -43,7 +43,7 @@
     handler: function( event ) {
       var currentX, currentY, timeout,
         args = arguments,
-        target = $( event.target ),
+        tarPOST = $( event.tarPOST ),
         previousX = event.pageX,
         previousY = event.pageY;
  
@@ -53,7 +53,7 @@
       };
  
       function clear() {
-        target
+        tarPOST
           .unbind( "mousemove", track )
           .unbind( "mouseout", clear );
         clearTimeout( timeout );
@@ -78,7 +78,7 @@
           // usable (#6028)
           delete event.originalEvent;
  
-          target.trigger( event );
+          tarPOST.trigger( event );
         } else {
           previousX = currentX;
           previousY = currentY;
@@ -87,7 +87,7 @@
       }
  
       timeout = setTimeout( handler, 100 );
-      target.bind({
+      tarPOST.bind({
         mousemove: track,
         mouseout: clear
       });
@@ -185,9 +185,15 @@
   <h3>Question 1</h3>
   <div>
     <p>
-    	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras libero lorem, mollis at commodo sed, malesuada at lacus. Maecenas consectetur eleifend tempor. Nullam consequat consectetur ipsum, id venenatis dui fringilla in. Suspendisse ut metus eu diam pretium ultricies. Duis gravida velit risus, in commodo nulla fringilla eget. In ac massa.
+    	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras libero lorem, mollis at commodo sed, malesuada at lacus. Maecenas consectetur eleifend tempor. Nullam consequat consectetur ipsum, id venenatis dui fringilla in. Suspendisse ut metus eu diam pretium ultricies. Duis gravida velit risus, in commodo nulla fringilla ePOST. In ac massa.
 
-   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras libero lorem, mollis at commodo sed, malesuada at lacus. Maecenas consectetur eleifend tempor. Nullam consequat consectetur ipsum, id venenatis dui fringilla in. Suspendisse ut metus eu diam pretium ultricies. Duis gravida velit risus, in commodo nulla fringilla eget. In ac massa.
+   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras libero lorem, mollis at commodo sed, malesuada at lacus. Maecenas consectetur eleifend tempor. Nullam consequat consectetur ipsum, id venenatis dui fringilla in. Suspendisse ut metus eu diam pretium ultricies. Duis gravida velit risus, in commodo nulla fringilla ePOST. In ac massa.
+    <p align = "center">
+      <form action = "notify.php" method = "POST">
+         <input type = "submit" id = "question1" value = "Solve">
+         <input type = "hidden" name = "id" value = "question1">
+      </form>
+    </p>
     </p>
   </div>
   <h3>Question 2</h3>
@@ -197,6 +203,12 @@
     purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
     velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
     suscipit faucibus urna.
+    <p align = "center">
+      <form action = "notify.php" method = "POST">
+         <input type = "submit" id = "question2" value = "Solve">
+         <input type = "hidden" name = "id" value = "question2">
+      </form>
+    </p>
     </p>
   </div>
   <h3>Question 3</h3>
@@ -206,12 +218,19 @@
     Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
     ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
     lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+    
     </p>
     <ul>
       <li>List item one</li>
       <li>List item two</li>
       <li>List item three</li>
     </ul>
+    <p align = "center">
+      <form action = "notify.php" method = "POST">
+         <input type = "submit" id = "question3" value = "Solve">
+         <input type = "hidden" name = "id" value = "question2">
+      </form>
+    </p>
   </div>
   <h3>Question 4</h3>
   <div>
@@ -225,6 +244,10 @@
     Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
     Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
     inceptos himenaeos.
+    <form action = "notify.php" method = "POST">
+         <input type = "submit" id = "question4" value = "Solve">
+         <input type = "hidden" name = "id" value = "question2">
+      </form>
     </p>
   </div>
 </div>

@@ -12,16 +12,14 @@
     <link rel="stylesheet" type="text/css" href="css/overrides.css">
     <link rel="stylesheet" type="text/css" href="css/notify.css">
    <link rel="stylesheet" href="http://css-spinners.com/css/spinner/timer.css" type="text/css">
-
-   <script type="text/javascript" src='js/scripts.js'></script>
-    
+   <script type="test/javascript" src='js/jquery.min.js'></script>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+   <script type="text/javascript" src='js/submi.js'></script>
+   
   </head>
-  <script type="text/javascript">
-            <script language=JavaScript> var message="Function Disabled!"; function clickIE4(){ if (event.button==2){ alert(message); return false; } } function clickNS4(e){ if (document.layers||document.getElementById&&!document.all){ if (e.which==2||e.which==3){ alert(message); return false; } } } if (document.layers){ document.captureEvents(Event.MOUSEDOWN); document.onmousedown=clickNS4; } else if (document.all&&!document.getElementById){ document.onmousedown=clickIE4; } document.oncontextmenu=new Function("alert(message);return false") </script>
-          </script>
+
 
   <body oncontextmenu="return false">
-
     <noscript>
   <style type="text/css">
     #screen { display:none;}
@@ -55,30 +53,6 @@
         </div>
         <div id="texty">
           <pre id="editor"><code>
-            using namespace std;
-            char str[1000];
-             
-            int counter(char A)
-            {if(A=='1') return 2;
-            else if(A=='0' || A=='6' || A=='9') return 6;
-            else if(A=='2' || A=='3' || A=='5') return 5;
-            else if(A=='4') return 4;
-            else if(A=='7') return 3;
-            else if(A=='8') return 7;
-            }
-             
-            int main()
-            { int sum=0; int i=0;
-             cin>>str;
-              while(i strlen(str))
-              {
-                  sum=sum+counter(str[i]);
-                  i++;
-                //testing for search with 'return'
-                }
-              cout sum endl;
-              return 0;
-            }
           </code>
           </pre>
 
@@ -87,19 +61,20 @@
             var editor = ace.edit("editor");
             editor.setTheme("ace/theme/chaos");
             editor.session.setMode("ace/mode/c_cpp");
-            editor.insert("under testing by tm \n");
             editor.setAutoScrollEditorIntoView(true);
-            editor.setOption("showPrintMargin", false)
-            editor.resize()
+            editor.setOption("showPrintMargin", false);
 
            </script>
-        </div>
+    </div>
         <hr style='margin-top:-2px;'>
-        <div id='console-io'>@Botfather: This area is for console messages | Under test by TM</div>
+        <div id='console-io'>
+            <p>Stdin</p>
+            <textarea id="stdin" style="width: 70%; height: 60%; display:inline-block;color:black;"></textarea>
+        </div>
         
         <div id="cmlogo" >
-          <img class="bottom" src="images/mini-bw.png" />
-          <img class="top" src="images/mini-col.png" />
+          <img class="bottom" data-toggle="tooltip" title="Click Here to submit" src="images/mini-bw.png" id = "evaluate"//>
+          <img class="top" data-toggle="tooltip" title="Click Here to submit" src="images/mini-col.png" id = "evaluate"/>
         </div>
         <div style='margin-top:-533px; margin-left: 1100px;'>  <a href="dashboard.php"><img src="images/close.png"></a> </div> <!-- back button buggy !-->
 
