@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
 	var sId = 0;
     var finish = false;
-
+    var result;
     var load = function(){
     	var extra = '';
     	if( finish ){
@@ -20,13 +20,21 @@ jQuery(document).ready(function($) {
 	    		//$('#web-right-panel > ul > li:last-child div.result').html(JSON.stringify(data));
 	    		if(!finish){
 	    			if(data['status'] != 0){
+	    				alert(sId);
 		    			setTimeout(load, 1000);
 	    			} else {
 	    				finish = true;
 	    				setTimeout(load, 1);
 		    		}
 	    		} else {
-	    			alert(JSON.stringify(data));
+
+	    			$('#language').append(data['langName']);
+	    			$('#time').append(data['time']);
+	    			$('#memory').append(data['memory']);
+	    			$('#result').append(data['result']);
+	    			$('#output').append(data['output']);
+	    			$('#modal-container').modal('show');
+
 	    		}
 	    	},
 	    	error: function(data){
@@ -35,7 +43,7 @@ jQuery(document).ready(function($) {
     	
     }
 		    
-    $(document).on('click', '#evaluate', function(){
+    $(document).on('click', '#but-sub', function(){
     	var url = 'http://api.compilers.sphere-engine.com/api/3/submissions/?access_token=14753b7df6bf36810009cc037ee4d7c1';
 	    var data = {
 	    	'sourceCode': editor.getValue(), 
@@ -50,6 +58,7 @@ jQuery(document).ready(function($) {
 	    	dataType: 'json',
 	    	success: function(data){
 	    		sId = data['id'];
+	    		alert(sId);
 	    		load();
 	    	},
 	    	error: function(data){

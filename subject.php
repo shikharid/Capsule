@@ -184,7 +184,7 @@
    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras libero lorem, mollis at commodo sed, malesuada at lacus. Maecenas consectetur eleifend tempor. Nullam consequat consectetur ipsum, id venenatis dui fringilla in. Suspendisse ut metus eu diam pretium ultricies. Duis gravida velit risus, in commodo nulla fringilla ePOST. In ac massa.
     <p align = "center">
       <form action = "notify.php" method = "POST">
-         <input type = "submit" id = "question1" value = "Solve">
+         <input type = "submit" id = "question1" value = "Solve" class='.hitter'>
          <input type = "hidden" name = "id" value = "question1">
       </form>
     </p>
@@ -199,7 +199,7 @@
     suscipit faucibus urna.
     <p align = "center">
       <form action = "notify.php" method = "POST">
-         <input type = "submit" id = "question2" value = "Solve">
+         <input type = "submit" id = "question2" value = "Solve" class='.hitter'>
          <input type = "hidden" name = "id" value = "question2">
       </form>
     </p>
@@ -221,7 +221,7 @@
     </ul>
     <p align = "center">
       <form action = "notify.php" method = "POST">
-         <input type = "submit" id = "question3" value = "Solve">
+         <input type = "submit" id = "question3" value = "Solve" class='.hitter'>
          <input type = "hidden" name = "id" value = "question2">
       </form>
     </p>
@@ -239,7 +239,7 @@
     Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
     inceptos himenaeos.
     <form action = "notify.php" method = "POST">
-         <input type = "submit" id = "question4" value = "Solve">
+         <input type = "submit" id = "question4" value = "Solve" class='.hitter'>
          <input type = "hidden" name = "id" value = "question2">
       </form>
     </p>

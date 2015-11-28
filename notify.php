@@ -7,25 +7,60 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Capsule | Group #54</title>
-
+  
+   <script type="text/javascript" src='js/jquery.js'></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/overrides.css">
     <link rel="stylesheet" type="text/css" href="css/notify.css">
-   <link rel="stylesheet" href="http://css-spinners.com/css/spinner/timer.css" type="text/css">
-   <script type="test/javascript" src='js/jquery.min.js'></script>
-   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-   <script type="text/javascript" src='js/submi.js'></script>
+   <script type="text/javascript" src='js/bootstrap.min.js'></script>
    
   </head>
 
 
   <body oncontextmenu="return false">
+
+   <script type="text/javascript" src='js/submi.js'></script>
     <noscript>
   <style type="text/css">
     #screen { display:none;}
   </style>
 
 </noscript>
+<div id='modalwrapper'>
+                <div class="col-md-12">
+      
+      <div class="modal fade" id="modal-container" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+               
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                ×
+              </button>
+              <h4 class="modal-title" id="myModalLabel">
+                Result
+              </h4>
+            </div>
+            <div class="modal-body">
+             <label>Language :</label> <p id = "language"></p>
+             <label>Time :</label><p id = "time"> </p>
+             <label>Memory :</label><p id = "memory"></p>
+             <label>Result :</label><p id = "result"></p>
+             <label>Output :</label><p id = "output"></p>
+            </div>
+            <div class="modal-footer">
+               
+              <button type="button" class="btn btn-default" data-dismiss="modal">
+                Close
+              </button> 
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </div>
       
 
 
@@ -38,7 +73,6 @@
 
  
  <?php error_reporting(0); if(isset($_SESSION['Userid'])) { ?>
-
 	<div class="row" id='backgr'>
       <div class="col-md-12" id='screen' >
         <div id='controlbar'>
@@ -46,7 +80,7 @@
             <input type='text' id='sherlock' placeholder="Search">
             <input type='button' id='but-sea' onClick='find();' title="Search">
             <input type='button' id='but-ref' onClick='flush();' title="Reset">
-            <input type='button' id='but-sub' onClick='submit();' title="Submit">
+            <input type='button' id='but-sub' title="Submit">
 
             
           </div>
@@ -73,8 +107,8 @@
         </div>
         
         <div id="cmlogo" >
-          <img class="bottom" data-toggle="tooltip" title="Click Here to submit" src="images/mini-bw.png" id = "evaluate"//>
-          <img class="top" data-toggle="tooltip" title="Click Here to submit" src="images/mini-col.png" id = "evaluate"/>
+          <img class="bottom"  src="images/mini-bw.png" />
+          <img class="top" src="images/mini-col.png"/>
         </div>
         <div style='margin-top:-533px; margin-left: 1100px;'>  <a href="dashboard.php"><img src="images/close.png"></a> </div> <!-- back button buggy !-->
 
@@ -97,7 +131,33 @@
 
       </div>
     </div>
+ 
+ <!-- <div id="openModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+           <a href="#close" title="Close" class="close">X</a>
+          <h4 class="modal-title">Result</h4>
+        </div>
+        <div class="modal-body">
+           <p id = "language"> </p>
+           <p id = "time"> </p>
+           <p id = "memory"> </p>
+           <p id = "result"> </p>
+           <p id = "output"> </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
 
+    </div> !-->
+    
+
+    </div>
+    
+
+    </div>
 
 
 
