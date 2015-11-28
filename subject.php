@@ -28,11 +28,7 @@
     });
   });
  
-  /*
-   * hoverIntent | Copyright 2011 Brian Cherne
-   * http://cherne.net/brian/resources/jquery.hoverIntent.html
-   * modified by the jQuery UI team
-   */
+ 
   $.event.special.hoverintent = {
     setup: function() {
       $( this ).bind( "mouseover", jQuery.event.special.hoverintent.handler );
@@ -73,9 +69,7 @@
               event[ prop ] = orig[ prop ];
             }
           }
-          // Prevent accessing the original event since the new event
-          // is fired asynchronously and the old event is no longer
-          // usable (#6028)
+         
           delete event.originalEvent;
  
           tarPOST.trigger( event );
