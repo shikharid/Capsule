@@ -12,7 +12,7 @@ BASE_DIR = dirname(abspath(__file__))
 
 ########## DEBUG CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = False
+DEBUG = True
 ########## END DEBUG CONFIGURATION
 
 
@@ -176,10 +176,12 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     # Static file management:
     'compressor',
+    'rest_framework',
 )
 
 LOCAL_APPS = (
     'libs',         # To make template tags work
+    'authentication',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -262,5 +264,6 @@ from local_settings import *
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
 TEMPLATE_DEBUG = DEBUG
 
+AUTH_USER_MODEL = 'authentication.User'
 
 COMPRESS_URL = STATIC_URL
