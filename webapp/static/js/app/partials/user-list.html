@@ -1,0 +1,19 @@
+<input type="search" ng-if="!listError" ng-model="query" placeholder="Search" aria-label="filter userList" />
+
+<code ng-if="listError">Error loading List</code>
+<table class="table table-responsive table-hover table-bordered table-striped animate-container" ng-if="!listError">
+    <thead>
+        <tr>
+            <td>Email</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user in userList|filter: query" class="animate-repeat">
+            <td>{{user.email}}</td>
+            <td>{{user.first_name}}</td>
+            <td>{{user.last_name}}</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app="capsuleApp">
+<head>
+    <meta charset="UTF-8">
+    <title>User Management System</title>
+    <base href="/">
+    {% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/libs/angular-material.min.css">
+    {% endblock %}
+
+    {% block js %}
+        <script src="{{ STATIC_URL }}js/libs/jquery.min.js"></script>
+        <script src="{{ STATIC_URL }}js/libs/bootstrap.min.js"></script>
+
+    {% endblock %}
+
+</head>
+<body md-theme="landingTheme">
+    {% block header %}
+        {% include 'navbar.html' %}
+    {% endblock %}
+
+    {% block content %}
+        <div ng-view></div>
+    {% endblock %}
+
+    {% block footer %}
+	{% include 'javascript.html' %}
+    {% endblock %}
+</body>
+</html>
