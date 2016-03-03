@@ -4,11 +4,15 @@ angular.module('capsuleApp').config(['URLS', 'PARTIALS', '$routeProvider', '$loc
     function(URLS, PARTIALS, $routeProvider, $locationProvider, RestangularProvider, $mdThemingProvider) {
 
         RestangularProvider.setBaseUrl(URLS.BASE_URL);
+
         $mdThemingProvider.theme('landingTheme')
-    .primaryPalette('light-blue').backgroundPalette('blue', {default: '400'});
+            .primaryPalette('light-blue')
+            .backgroundPalette('blue', {default: '400'});
+
         $mdThemingProvider.theme('loginCardTheme')
-    .primaryPalette('light-blue')
-        .warnPalette('green');
+            .primaryPalette('light-blue')
+            .warnPalette('green');
+
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
 
@@ -18,8 +22,11 @@ angular.module('capsuleApp').config(['URLS', 'PARTIALS', '$routeProvider', '$loc
                 templateUrl: PARTIALS.LOGIN
             }).
             when(URLS.LOGOUT, {
-                //controller: 'LogoutController',
+                controller: 'LogoutController',
                 templateUrl: PARTIALS.LOGOUT
+            }).
+            when(URLS.INDEX, {
+               redirectTo: URLS.LOGIN
             }).
             otherwise({
                 redirectTo: URLS.INDEX

@@ -29,12 +29,12 @@
 
         </md-card-title>
         <md-card-content>
-            <form role="form" ng-submit="login()">
+            <form role="form">
                 <div layout="row" class="input-field">
                     <md-input-container flex="90">
                         <label>College ID</label>
                         <md-icon md-svg-src="static/app/images/ic_person_24px.svg" class="email"></md-icon>
-                        <input ng-model="user.id" type="text"/>
+                        <input ng-model="user.member_id" type="text"/>
                     </md-input-container>
                 </div>
                 <div layout="row" class="input-field">
@@ -45,7 +45,7 @@
                     </md-input-container>
                 </div>
                 <div layout="row">
-                    <md-button class="md-raised md-warn" flex="90">
+                    <md-button class="md-raised md-warn" flex="90" ng-click="login()">
                         <span style="color:white;">Login</span></md-button>
                 </div>
             </form>

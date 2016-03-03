@@ -59,3 +59,9 @@ class UserDetailsView(views.APIView):
 
     def get(self, request):
         return Response(UserSerializer(request.user).data)
+
+
+class UserLoginView(views.APIView):
+
+    def get(self, request):
+        return Response({'loggedIn': request.user.is_authenticated()})
