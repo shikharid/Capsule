@@ -40,6 +40,19 @@
     <!--Progress bar!-->
     <md-progress-linear md-mode="indeterminate" ng-if="processing"></md-progress-linear>
 
+    <!--SPOJ Error !-->
+
+    <md-card ng-if="!!error" style="background-color: #DB4437;">
+        <md-card-title>
+            <md-card-title-text>
+                    <span class="md-headline">Error</span>
+            </md-card-title-text>
+            <md-card-content>
+                <p>{{ error }}</p>
+            </md-card-content>
+        </md-card-title>
+    </md-card>
+
     <!--Result !-->
     <div class="md-whiteframe-10dp" ng-if="!!result" md-theme="default">
         <md-subheader class="md-no-sticky">Result</md-subheader>
@@ -56,7 +69,7 @@
                     </md-card-content>
                 </md-card>
             </div>
-            <md-card ng-if="result.error" style="background-color: #FF5722;">
+            <md-card ng-if="result.error" style="background-color: #DB4437;">
                 <md-card-title>
                     <md-card-title-text>
                             <span class="md-headline">Error</span>

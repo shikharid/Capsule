@@ -15,6 +15,8 @@ angular.module('capsuleApp').config(['URLS', 'PARTIALS', '$routeProvider', '$loc
 
         $mdThemingProvider.theme('default').primaryPalette('light-blue').warnPalette('pink');
 
+        $mdThemingProvider.theme('default-dark').primaryPalette('light-blue').warnPalette('pink').dark();
+
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
 

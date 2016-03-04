@@ -16,6 +16,8 @@ angular.module('capsuleApp').controller('LoginController', ['URLS', '$location',
             );
         }
         $scope.login = function(){
+            if($scope.formError)
+                delete $scope.formError;
             Authentication.login($scope.user).then(
             function(data){
                 $location.url(URLS.INDEX);

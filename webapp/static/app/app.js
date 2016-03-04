@@ -5,7 +5,8 @@ angular.module('capsuleApp', [
     'ngRoute',
     'ngAnimate',
     'ngCookies',
-    'ngMaterial'
+    'ngMaterial',
+    'angular-loading-bar'
 ]).run(['$http', function($http){
       $http.defaults.xsrfHeaderName = 'X-CSRFToken';
       $http.defaults.xsrfCookieName = 'csrftoken';

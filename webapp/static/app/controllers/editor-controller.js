@@ -24,6 +24,8 @@ angular.module('capsuleApp').controller('editorController', ['spojService', 'Aut
             $scope.processing = true;
             if($scope.result)
                 delete $scope.result;
+            if($scope.error)
+                delete $scope.error;
             spojService.submit($scope.code).then(
                 function(data){
 
@@ -52,13 +54,14 @@ angular.module('capsuleApp').controller('editorController', ['spojService', 'Aut
                                                     function(data){
                                                         $scope.processing = false;
                                                         delete $scope.result;
-                                                        $scope.error = 'Error in fetching result.Retry'
+
+                                                        $scope.error = 'Error in fetching result.Retry';
+                                                        console.log($scope.error);
                                                     }
                                                 );
                                             }
                                         },
                                         function(data){
-
                                         }
                                 )
                     }, 2000);
@@ -68,6 +71,7 @@ angular.module('capsuleApp').controller('editorController', ['spojService', 'Aut
                     $scope.processing = false;
                     delete $scope.result;
                     $scope.error = 'Error in submission.Retry';
+                    console.log($scope.error);
                 }
             )
         }

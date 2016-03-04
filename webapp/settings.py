@@ -182,6 +182,8 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'libs',         # To make template tags work
     'authentication',
+    'judge',
+    'problems',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

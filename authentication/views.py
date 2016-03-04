@@ -65,3 +65,8 @@ class UserLoginView(views.APIView):
 
     def get(self, request):
         return Response({'loggedIn': request.user.is_authenticated()})
+
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]

@@ -6,6 +6,7 @@
     <base href="/">
     {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}app/css/loading-bar.min.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Angular Material style sheet -->
@@ -28,11 +29,11 @@
     {% endblock %}
 
     {% block content %}
-        <div layout="row" style="min-height: 140vh;">
+        <div layout="row" style="min-height: 100vh;" style="min-height: 100vh;">
             {% if user.is_authenticated %}
                 {% include 'sidebar.html' %}
             {% endif %}
-            <div ng-view flex></div>
+            <div ng-view flex style="min-height: 100vh;"></div>
         </div>
     {% endblock %}
 
