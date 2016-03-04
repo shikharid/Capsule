@@ -7,7 +7,7 @@
     {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/libs/bootstrap.min.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="{{ STATIC_URL }}css/libs/angular-material.min.css">
     {% endblock %}
@@ -20,12 +20,20 @@
 
 </head>
 <body md-theme="landingTheme">
+
     {% block header %}
-        {% include 'navbar.html' %}
+        {% if user.is_authenticated %}
+            {% include 'navbar.html' %}
+        {% endif %}
     {% endblock %}
 
     {% block content %}
-        <div ng-view></div>
+        <div layout="row" style="min-height: 140vh;">
+            {% if user.is_authenticated %}
+                {% include 'sidebar.html' %}
+            {% endif %}
+            <div ng-view flex></div>
+        </div>
     {% endblock %}
 
     {% block footer %}

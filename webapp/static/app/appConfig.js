@@ -13,6 +13,8 @@ angular.module('capsuleApp').config(['URLS', 'PARTIALS', '$routeProvider', '$loc
             .primaryPalette('light-blue')
             .warnPalette('green');
 
+        $mdThemingProvider.theme('default').primaryPalette('light-blue').warnPalette('pink');
+
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
 
@@ -25,9 +27,13 @@ angular.module('capsuleApp').config(['URLS', 'PARTIALS', '$routeProvider', '$loc
                 controller: 'LogoutController',
                 templateUrl: PARTIALS.LOGOUT
             }).
-            when(URLS.INDEX, {
-               redirectTo: URLS.LOGIN
+            when(URLS.EDITOR, {
+                controller: 'editorController',
+                templateUrl: PARTIALS.EDITOR
             }).
+            //when(URLS.INDEX, {
+            //   redirectTo: URLS.LOGIN
+            //}).
             otherwise({
                 redirectTo: URLS.INDEX
             });
