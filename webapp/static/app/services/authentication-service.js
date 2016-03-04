@@ -19,7 +19,6 @@ function(Restangular, API){
     }
 
     function logout() {
-        console.log('here');
         return User.get('logout/');
     }
 }]);

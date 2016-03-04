@@ -17,6 +17,15 @@ class Assignment(models.Model):
     created_on = models.DateField(auto_now=True)
     updated_on = models.DateField(auto_now_add=True)
 
+    def get_full_name(self):
+        return self.name
+
+    def get_short_name(self):
+        return self.name
+
+    def __unicode__(self):
+        return self.name
+
 
 class Problem(models.Model):
     """
@@ -29,6 +38,15 @@ class Problem(models.Model):
 
     created_on = models.DateField(auto_now=True)
     updated_on = models.DateField(auto_now_add=True)
+
+    def get_full_name(self):
+        return self.name
+
+    def get_short_name(self):
+        return self.name
+
+    def __unicode__(self):
+        return self.name
 
 
 class TestCase(models.Model):
