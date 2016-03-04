@@ -1,0 +1,81 @@
+<style>
+.submission-result {
+  float: left;
+  width: auto;
+  box-sizing: border-box;
+  padding: 0 8px; }
+.submission-result .md-item-text {
+  padding: 8px;
+  background: #f0f0f0;
+  border-radius: 3px; }
+.submission-result .md-item-text h3,
+.submission-result .md-item-text p {
+  padding: 0;
+  margin: 0; }
+</style>
+<div class="md-whiteframe-10dp" layout="column" style="min-height: 100vh;" ng-controller="editorController">
+    <div id="editor" flex="75" style="min-height: 75vh;"></div>
+
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/chaos");
+        editor.session.setMode("ace/mode/c_cpp");
+        editor.setAutoScrollEditorIntoView(true);
+        editor.setOption("showPrintMargin", false);
+        document.getElementById('editor').style.fontSize='17px';
+    </script>
+
+    <!--Custom user input !-->
+    <div class="md-whiteframe-4dp" layout="row" flex>
+        <md-input-container flex="70" class="md-block">
+            <label>Input</label>
+            <textarea ng-model="code.input" style="min-height: 15vh; font-size: 1.2em" md-select-on-focus></textarea>
+        </md-input-container>
+        <span flex></span>
+        <div layout="column" flex="10" layout-align="center center" layout-fill layout-margin>
+            <md-button class="md-raised md-primary" layout-margin ng-click="submit()">SUBMIT</md-button>
+        </div>
+    </div>
+
+    <!--Progress bar!-->
+    <md-progress-linear md-mode="indeterminate" ng-if="processing"></md-progress-linear>
+
+    <!--Result !-->
+    <div class="md-whiteframe-10dp" ng-if="!!result" md-theme="default">
+        <md-subheader class="md-no-sticky">Result</md-subheader>
+        <div layout="column">
+            <div layout="row">
+                <md-card ng-repeat="(key, value) in result.small" flex="33">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">{{ key }}</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <p>{{ value }}</p>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <md-card ng-if="result.error" style="background-color: #FF5722;">
+                <md-card-title>
+                    <md-card-title-text>
+                            <span class="md-headline">Error</span>
+                    </md-card-title-text>
+                    <md-card-content>
+                        <p>{{ result.error }}</p>
+                    </md-card-content>
+                </md-card-title>
+            </md-card>
+            <md-card ng-repeat="(key, value) in result.large">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{{ key }}</span>
+                     </md-card-title-text>
+                    <md-card-content>
+                        <p>{{ value }}</p>
+                    </md-card-content>
+                </md-card-title>
+            </md-card>
+        </div>
+    </div>
+</div>
