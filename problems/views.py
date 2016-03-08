@@ -160,6 +160,26 @@ class EditTestCase(generics.ListAPIView):
             return TestCase.objects.none()
 
 
+class RemoveTestCase(generics.DestroyAPIView):
+    serializer_class = EditTestCaseSerializer
+    permission_classes = [IsFaculty]
+
+    def get_object(self):
+        assignment_id = self.kwargs.get('assignment_id', None)
+        problem_id = self.kwargs.get('problem_id', None)
+        testcase_id = self.kwargs.get('id', None)
+        try:
+            Assignment.objects.get(id=assignment_id, faculty_id=self.request.user)
+            problem_obj = Problem.objects.get(id=problem_id)
+            testcase_obj = TestCase.objects.get(id=testcase_id, problem_id=problem_obj)
+            return testcase_obj
+        except Assignment.DoesNotExist:
+            return TestCase.objects.none()
+        except Problem.DoesNotExist:
+            return TestCase.objects.none()
+        except TestCase.DoesNotExist:
+            return TestCase.objects.none()
+
 
 
 

@@ -27,6 +27,9 @@ urlpatterns = patterns(
         name='add-testcase'),
     url(r'^assignment/(?P<assignment_id>[\d]+)/problems/(?P<problem_id>[\d]+)/edit-testcase/$',
         views.EditTestCase.as_view(),
-        name='edit-testcase'),
+        name='edit-testcase-list'),
+    url(r'^assignment/(?P<assignment_id>[\d]+)/problems/(?P<problem_id>[\d]+)/remove-testcase/(?P<id>[\d]+)/$',
+        views.RemoveTestCase.as_view(),
+        name='remove-testcase'),
 
 )

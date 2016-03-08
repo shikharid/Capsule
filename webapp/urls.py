@@ -22,6 +22,3 @@ urlpatterns = patterns(
     url(r'^api/problem/', include(problem_urls)),
     url('^.*$', TemplateView.as_view(template_name='index.html'), name="index"),
 )
-
-urlpatterns += staticfiles_urlpatterns()
-urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
