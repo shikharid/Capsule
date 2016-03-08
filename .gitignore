@@ -3,3 +3,6 @@
 
 # python executables
 *.pyc
+
+# Media Files
+webapp/media/
