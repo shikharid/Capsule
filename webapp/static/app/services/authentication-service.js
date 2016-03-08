@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('capsuleApp').factory('Authentication', ['Restangular', 'API',
-function(Restangular, API){
+angular.module('capsuleApp').factory('Authentication', ['Restangular',
+function(Restangular){
     var User = Restangular.all('user');
     return {
         isAuthenticated: isAuthenticated,

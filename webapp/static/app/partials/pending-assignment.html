@@ -1,0 +1,51 @@
+<style>
+    .pendingTiles md-grid-tile {
+      transition: all 700ms;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .pendingTiles md-grid-tile md-icon {
+      padding-bottom: 32px; }
+    .pendingTiles md-grid-tile md-grid-tile-footer {
+      background: rgba(0, 0, 0, 0.68);
+      height: 24px; }
+    .pendingTiles md-grid-tile md-grid-tile-header {
+      height: 32px; }
+    .pendingTiles md-grid-tile-footer figcaption {
+      width: 100%; }
+    .pendingTiles md-grid-tile-footer figcaption h3 {
+      margin: 0;
+      font-weight: 700;
+      width: 100%;
+      text-align: center; }
+    .pendingTiles md-grid-tile-header figcaption {
+      width: 100%; }
+    .pendingTiles md-icon {
+        font-size: 3.5vw;
+    }
+    .pendingTiles md-grid-tile-header figcaption h3 {
+      margin: 0;
+      font-weight: 700;
+      width: 100%;
+      text-align: center; }
+    
+    .pendingTiles {
+        margin: 20px 20px 20px 50px;
+    }
+</style>
+<div ng-controller="pendingController" flex ng-cloak class="pendingTiles">
+    <md-grid-list md-cols="10" md-row-height="1:1" md-gutter="15px">
+        <md-grid-tile
+          ng-repeat="v in assignment"
+          ng-style="{
+            'background': v.color
+          }"
+           md-colspan="5"
+           md-rowspan="2"
+                ng-click="gotoAssignment($index)">
+          <md-grid-tile-header><h3>{{ v.name }}</h3></md-grid-tile-header>
+          <md-icon md-font-library="material-icons">assignment</md-icon>
+          <md-grid-tile-footer><h3>Deadline: {{v.deadline}}</h3></md-grid-tile-footer>
+        </md-grid-tile>
+    </md-grid-list>
+</div>

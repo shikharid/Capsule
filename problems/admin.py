@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from problems.models import Problem, Assignment
+from problems.models import Problem, Assignment, TestCase
 
 
 class ProblemAdmin(admin.ModelAdmin):
@@ -24,6 +24,6 @@ class AssignmentAdmin(admin.ModelAdmin):
                     'updated_on')
 
 
-
 admin.site.register(Assignment, AssignmentAdmin)
 admin.site.register(Problem, ProblemAdmin)
+admin.site.register(TestCase)

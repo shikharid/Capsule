@@ -1,0 +1,15 @@
+<div layout="column">
+
+<div ng-controller="problemListController" flex="50" ng-cloak class="pendingTiles" md-theme="default">
+    <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab ng-repeat="v in problems" label="{{ v.name }}">
+            <md-content class="md-padding">
+                <h1 class="md-display-2">{{ v.name }}</h1>
+                <p ng-bind-html="convertToSafe(v.statement)"></p>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</div>
+<div flex ng-include="'static/app/partials/editor.html'">
+</div>
+</div>

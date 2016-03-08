@@ -1,13 +1,13 @@
-import json
 from datetime import datetime
-from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 
-from rest_framework import permissions, generics, views
+from rest_framework import generics, serializers
 from rest_framework.response import Response
-from problems.models import Assignment, Problem
-from problems.permission import IsStudent
-from problems.serializers import AssignmentSerializer, ProblemSerializer
+
+from problems.models import Assignment, Problem, TestCase
+from problems.permission import IsStudent, IsFaculty
+from problems.serializers import AssignmentSerializer, ProblemSerializer, EditAssignmentSerializer, \
+    EditProblemSerializer, TestCaseSerializer, EditTestCaseSerializer
 
 
 class PendingAssignmentAPIView(generics.ListAPIView):
@@ -55,6 +55,117 @@ class ProblemListAPIView(generics.ListAPIView):
             return Problem.objects.all().filter(assignment_id=assignment_obj)
         except Exception:
             return Problem.objects.none()
+
+
+# Faculty End Views
+
+class AddAssignment(generics.CreateAPIView):
+    queryset = Assignment.objects.all()
+    serializer_class = AssignmentSerializer
+    permission_classes = [IsFaculty]
+
+
+class ListAssignment(generics.ListAPIView):
+    serializer_class = AssignmentSerializer
+    permission_classes = [IsFaculty]
+
+    def get_queryset(self):
+        return Assignment.objects.filter(faculty_id=self.request.user)
+
+
+class EditAssignment(generics.RetrieveUpdateAPIView):
+
+    serializer_class = EditAssignmentSerializer
+    permission_classes = [IsFaculty]
+
+    def get_queryset(self):
+        return Assignment.objects.filter(faculty_id=self.request.user)
+
+
+class ListProblems(generics.ListAPIView):
+    serializer_class = ProblemSerializer
+    permission_classes = [IsFaculty]
+
+    def get_queryset(self):
+        assignment_id = self.kwargs.get('assignment_id', None)
+        try:
+            assignment_obj = Assignment.objects.get(id=assignment_id, faculty_id=self.request.user)
+            return Problem.objects.filter(assignment_id=assignment_obj)
+        except Assignment.DoesNotExist:
+            return Problem.objects.none()
+
+
+class AddProblems(generics.CreateAPIView):
+    serializer_class = ProblemSerializer
+    permission_classes = [IsFaculty]
+
+    def create(self, request, *args, **kwargs):
+        request.data['assignment_id'] = self.kwargs.get('assignment_id', None)
+
+        try:
+            Assignment.objects.get(id=request.data['assignment_id'], faculty_id=self.request.user)
+        except Assignment.DoesNotExist:
+            request.data['assignment_id'] = None
+
+        return super(AddProblems, self).create(request, *args, **kwargs)
+
+
+class EditProblems(generics.RetrieveUpdateAPIView):
+
+    queryset = Problem.objects.all()
+    serializer_class = EditProblemSerializer
+    permission_classes = [IsFaculty]
+
+    def get_object(self):
+        assignment_id = self.kwargs.get('assignment_id', None)
+        problem_id = self.kwargs.get('problem_id', None)
+
+        try:
+            assignment_obj = Assignment.objects.get(id=assignment_id, faculty_id=self.request.user)
+            return Problem.objects.get(id=problem_id, assignment_id=assignment_obj)
+
+        except Problem.DoesNotExist:
+            raise serializers.ValidationError('Error.No such Problem exists.')
+
+
+class AddTestCase(generics.CreateAPIView):
+    serializer_class = TestCaseSerializer
+    permission_classes = [IsFaculty]
+
+    def create(self, request, *args, **kwargs):
+        request.data['problem_id'] = self.kwargs.get('problem_id', None)
+
+        try:
+            Assignment.objects.get(id=self.kwargs.get('assignment_id', None), faculty_id=self.request.user)
+        except Assignment.DoesNotExist:
+            request.data['problem_id'] = None
+
+        return super(AddTestCase, self).create(request, *args, **kwargs)
+
+
+class EditTestCase(generics.ListAPIView):
+    serializer_class = EditTestCaseSerializer
+    permission_classes = [IsFaculty]
+
+    def get_queryset(self):
+        assignment_id = self.kwargs.get('assignment_id', None)
+        problem_id = self.kwargs.get('problem_id', None)
+        try:
+            Assignment.objects.get(id=assignment_id, faculty_id=self.request.user)
+            problem_obj = Problem.objects.get(id=problem_id)
+            return TestCase.objects.filter(problem_id=problem_obj)
+        except Assignment.DoesNotExist:
+            return TestCase.objects.none()
+        except Problem.DoesNotExist:
+            return TestCase.objects.none()
+
+
+
+
+
+
+
+
 
 
 

@@ -22,7 +22,7 @@ angular.module('capsuleApp').config(['URLS', 'PARTIALS', '$routeProvider', '$loc
 
         $routeProvider.
             when(URLS.LOGIN, {
-                //controller: 'LoginController',
+                controller: 'LoginController',
                 templateUrl: PARTIALS.LOGIN
             }).
             when(URLS.LOGOUT, {
@@ -33,9 +33,14 @@ angular.module('capsuleApp').config(['URLS', 'PARTIALS', '$routeProvider', '$loc
                 controller: 'editorController',
                 templateUrl: PARTIALS.EDITOR
             }).
-            //when(URLS.INDEX, {
-            //   redirectTo: URLS.LOGIN
-            //}).
+            when(URLS.PENDING, {
+               controller: 'pendingController',
+                templateUrl: PARTIALS.PENDING
+            }).
+            when(URLS.PENDING_PROBLEMS, {
+               controller: 'problemListController',
+                templateUrl: PARTIALS.PROBLEM_LIST
+            }).
             otherwise({
                 redirectTo: URLS.INDEX
             });

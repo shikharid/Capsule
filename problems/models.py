@@ -1,6 +1,15 @@
+import os
 from django.core.validators import MinValueValidator
 from django.db import models
 from authentication.models import User
+
+
+def get_input_file_path(testcase, name):
+    return os.path.join('test-case', '{0}.in'.format(testcase.id))
+
+
+def get_output_file_path(testcase, name):
+    return os.path.join('test-case', '{0}.out'.format(testcase.id))
 
 
 class Assignment(models.Model):
@@ -32,7 +41,7 @@ class Problem(models.Model):
     Stores Problem Information of different assignments
     """
     assignment_id = models.ForeignKey(Assignment)
-    statement = models.CharField(max_length=2000)
+    statement = models.TextField()
     name = models.CharField(max_length=50)
     points = models.IntegerField(validators=[MinValueValidator(0)])
 
@@ -54,5 +63,9 @@ class TestCase(models.Model):
     Stores test cases for problems
     """
     problem_id = models.ForeignKey(Problem)
-    input = models.CharField(max_length=1000000)
-    output = models.CharField(max_length=1000000)
+    input = models.FileField(upload_to=get_input_file_path)
+    output = models.FileField(upload_to=get_output_file_path)
+    is_used = models.BooleanField(default=True)
+
+    created_on = models.DateField(auto_now=True)
+    updated_on = models.DateField(auto_now_add=True)
