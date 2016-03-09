@@ -129,6 +129,10 @@ class EditProblems(generics.RetrieveUpdateAPIView):
 
 
 class AddTestCase(generics.CreateAPIView):
+    """
+    Add's test case after verifying problem and assignment id
+    Faculty can only add if the assignment id belongs to them
+    """
     serializer_class = TestCaseSerializer
     permission_classes = [IsFaculty]
 
@@ -144,6 +148,10 @@ class AddTestCase(generics.CreateAPIView):
 
 
 class EditTestCase(generics.ListAPIView):
+    """
+    Toggle use/don't use a test case when judging a batch of submissions.
+    Useful when same assignment has to be implemented using multiple algo's.
+    """
     serializer_class = EditTestCaseSerializer
     permission_classes = [IsFaculty]
 
@@ -161,6 +169,12 @@ class EditTestCase(generics.ListAPIView):
 
 
 class RemoveTestCase(generics.DestroyAPIView):
+
+    """
+    Verifies assignment id and problem id before deleting the testcase
+    The testcase is removed from TestCase database table
+    """
+    # TODO - Remove test case from folder also
     serializer_class = EditTestCaseSerializer
     permission_classes = [IsFaculty]
 

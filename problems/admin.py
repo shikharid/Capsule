@@ -24,6 +24,11 @@ class AssignmentAdmin(admin.ModelAdmin):
                     'updated_on')
 
 
+class TestCaseAdmin(admin.ModelAdmin):
+
+    list_display = ('id',
+                    'problem_id')
+
 admin.site.register(Assignment, AssignmentAdmin)
 admin.site.register(Problem, ProblemAdmin)
-admin.site.register(TestCase)
+admin.site.register(TestCase,TestCaseAdmin)
