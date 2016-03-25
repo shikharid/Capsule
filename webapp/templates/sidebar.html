@@ -1,3 +1,4 @@
+{% if not user.is_faculty %}
 <div flex="20">
 <section layout="row" md-theme="default">
     <md-sidenav style="min-height: 140vh;" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
@@ -51,3 +52,36 @@
     </md-sidenav>
   </section>
 </div>
+{% else %}
+    <div flex="5">
+        <section layout="row" md-theme="default">
+            <md-sidenav style="min-height: 140vh;" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
+                <md-content>
+                    <md-list>
+                        <md-list-item  md-ink-ripple>
+                            <a href="assignment/">
+                                <md-icon md-font-library="material-icons" aria-label="Live Assignments" title="Live Assignments">assignment</md-icon>
+                            </a>
+                        </md-list-item>
+                        <md-list-item  md-ink-ripple>
+                            <a href="assignment/evaluate/">
+                                <md-icon md-font-library="material-icons" aria-label="Evaluate Assignments" title="Evaluate Assignments">assessment</md-icon>
+                            </a>
+                        </md-list-item>
+                        <md-list-item md-ink-ripple>
+                            <a href="editor/">
+                                <md-icon md-font-library="material-icons" aria-label="Code Editor" title="Code Editor">mode_edit</md-icon>
+                            </a>
+                        </md-list-item>
+                        <md-list-item md-ink-ripple>
+                            <a href="logout/">
+                                <md-icon md-font-library="material-icons" aria-label="Logout" title="Logout">exit_to_app</md-icon>
+                            </a>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-sidenav>
+        </section>
+    </div>
+
+{% endif %}

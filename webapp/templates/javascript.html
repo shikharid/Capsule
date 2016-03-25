@@ -23,6 +23,11 @@
 <script type="text/javascript" src="{{ STATIC_URL }}app/services/spoj-service.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}app/services/assignment-service.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}app/services/problem-service.js"></script>
+{% if user.is_faculty %}
+<script type="text/javascript" src="{{ STATIC_URL }}app/services/faculty-assignment-service.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/services/faculty-problem-service.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/services/faculty-testcase-service.js"></script>
+{% endif %}
 
 <!--App controllers-->
 <script type="text/javascript" src="{{ STATIC_URL }}app/controllers/login-controller.js"></script>
@@ -30,3 +35,11 @@
 <script type="text/javascript" src="{{ STATIC_URL }}app/controllers/editor-controller.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}app/controllers/pending-list-controller.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}app/controllers/problem-list-controller.js"></script>
+
+{% if user.is_faculty %}
+<script type="text/javascript" src="{{ STATIC_URL }}app/controllers/faculty-assignment-controller.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/controllers/add-assignment-controller.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/controllers/edit-assignment-controller.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/controllers/faculty-problem-controller.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/controllers/faculty-testcase-controller.js"></script>
+{% endif %}

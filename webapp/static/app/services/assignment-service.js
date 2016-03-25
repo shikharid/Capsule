@@ -2,7 +2,7 @@
 
 angular.module('capsuleApp').factory('Assignment', ['Restangular',
 function(Restangular){
-    var Problem = Restangular.all('problem');
+    var Problem = Restangular.all('capsule');
     return {
         getStudentAssignmentList: getStudentAssignmentList
     };

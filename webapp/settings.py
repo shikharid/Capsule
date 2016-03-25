@@ -177,6 +177,7 @@ THIRD_PARTY_APPS = (
     # Static file management:
     'compressor',
     'rest_framework',
+    'celery',
 )
 
 LOCAL_APPS = (
@@ -269,3 +270,6 @@ TEMPLATE_DEBUG = DEBUG
 AUTH_USER_MODEL = 'authentication.User'
 
 COMPRESS_URL = STATIC_URL
+
+# Celery configuration
+BROKER_URL = 'amqp://guest:guest@localhost:5672//'

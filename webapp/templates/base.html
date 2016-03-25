@@ -1,7 +1,11 @@
 <!doctype html>
 <html ng-app="capsuleApp">
 <head>
-    <meta charset="UTF-8">
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     <title>User Management System</title>
     <base href="/">
     {% block css %}
@@ -15,9 +19,16 @@
 
     {% block js %}
         <script src="{{ STATIC_URL }}js/libs/jquery.min.js"></script>
+        <script src="{{ STATIC_URL }}app/js/moment.js"></script>
         <script src="{{ STATIC_URL }}js/libs/bootstrap.min.js"></script>
 
     {% endblock %}
+
+    <style>
+        body {
+            font-family: 'Josefin Slab', serif;
+        }
+    </style>
 
 </head>
 <body md-theme="landingTheme">

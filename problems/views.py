@@ -53,7 +53,7 @@ class ProblemListAPIView(generics.ListAPIView):
             assignment_id = self.request.data.get('assignment_id', None)
             assignment_obj = Assignment.objects.get(id=assignment_id)
             return Problem.objects.all().filter(assignment_id=assignment_obj)
-        except Exception:
+        except Assignment.DoesNotExist:
             return Problem.objects.none()
 
 
@@ -63,6 +63,10 @@ class AddAssignment(generics.CreateAPIView):
     queryset = Assignment.objects.all()
     serializer_class = AssignmentSerializer
     permission_classes = [IsFaculty]
+
+    def create(self, request, *args, **kwargs):
+        request.data['faculty_id'] = self.request.user.id
+        return super(AddAssignment, self).create(request, *args, **kwargs)
 
 
 class ListAssignment(generics.ListAPIView):

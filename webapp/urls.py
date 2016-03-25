@@ -5,6 +5,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 from authentication import urls as auth_urls
 from problems import urls as problem_urls
+from judge import urls as judge_urls
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/admin/#hooking-adminsite-instances-into-your-urlconf
 from webapp.settings import MEDIA_URL, MEDIA_ROOT
@@ -20,5 +21,6 @@ urlpatterns = patterns(
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/user/', include(auth_urls)),
     url(r'^api/capsule/', include(problem_urls)),
+    url(r'^api/capsule/', include(judge_urls)),
     url('^.*$', TemplateView.as_view(template_name='index.html'), name="index"),
 )

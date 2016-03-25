@@ -45,6 +45,8 @@ class Problem(models.Model):
     name = models.CharField(max_length=50)
     points = models.IntegerField(validators=[MinValueValidator(0)])
 
+    time_limit = models.DecimalField(decimal_places=1, max_digits=3, validators=[MinValueValidator(1.0)])
+
     created_on = models.DateField(auto_now=True)
     updated_on = models.DateField(auto_now_add=True)
 
@@ -69,3 +71,6 @@ class TestCase(models.Model):
 
     created_on = models.DateField(auto_now=True)
     updated_on = models.DateField(auto_now_add=True)
+
+    def __unicode__(self):
+        return '{0} TestCase'.format(self.problem_id.name)

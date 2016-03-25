@@ -10,4 +10,4 @@ angular.module('capsuleApp', [
 ]).run(['$http', function($http){
       $http.defaults.xsrfHeaderName = 'X-CSRFToken';
       $http.defaults.xsrfCookieName = 'csrftoken';
-    }]).controller('LoginController', function(){});
+    }]);

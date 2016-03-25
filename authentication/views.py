@@ -8,7 +8,6 @@ from authentication.models import User
 from authentication.permission import IsAnonymous
 from authentication.serializers import UserSerializer
 
-
 class LoginView(views.APIView):
 
     permission_classes = [IsAnonymous]
@@ -37,8 +36,6 @@ class LoginView(views.APIView):
                     'status': 'Invalid Request',
                     'message': 'Invalid Request Paramaters'
                     }, status=status.HTTP_401_UNAUTHORIZED)
-
-
 
 
 class LogoutView(views.APIView):
