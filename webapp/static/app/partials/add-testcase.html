@@ -1,0 +1,41 @@
+
+<style>
+    .main-fab {
+      position:absolute;
+      z-index:200;
+      font-size:30px;
+      left:240px;
+      transform:scale(.88,.88);
+    }
+    a:focus, a:hover {
+        text-decoration: none;
+        border: none;
+    }
+</style>
+<md-controller ng-controller="editProblemController" flex ng-cloak>
+    <md-toolbar md-theme="default-dark">
+        <div class="md-toolbar-tools" >
+            <h3 style="margin-left: 2%;">Add Testcase: {{ problem.name }}</h3>
+        </div>
+    </md-toolbar>
+    <div class="md-whiteframe-z2" style="margin: 10px">
+        <form md-theme="default" name="testcaseform" enctype="multipart/form-data">
+            <div layout="row" style="padding:2%;">
+                <label>Input File: </label>
+                <input file-model="newtestcase.input" type="file" required="true">
+            </div>
+            <div layout="row" style="padding: 2%">
+                <label>Output File:</label>
+                <input file-model="newtestcase.output" type="file" required="true">
+            </div>
+            <div layout="row" style="padding: 2%;">
+
+                <md-button class="md-raised md-primary" ng-click="uploadTestcase()" style="max-height: 25px;" md-theme="default-form">
+                    Add Testcase
+                </md-button>
+            </div>
+
+        </form>
+    </div>
+</md-controller>
+

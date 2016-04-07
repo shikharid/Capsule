@@ -1,0 +1,136 @@
+
+<style>
+    .main-fab {
+      position:absolute;
+      z-index:200;
+      font-size:30px;
+      left:240px;
+      transform:scale(.88,.88);
+    }
+    a:focus, a:hover {
+        text-decoration: none;
+        border: none;
+    }
+    .table td {
+        border-top: none !important;
+     }
+    .table tr {
+        min-height: 65px;
+        text-align: center;
+        font-size: 1.2em;
+        height: 65px;
+    }
+    .table>thead>tr>th {
+        text-align: center;
+        font-weight: 400;
+        vertical-align: bottom;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    }
+    .animate-container {
+        background:white;
+        border:1px solid black;
+        list-style:none;
+        margin:0;
+        padding:0 10px;
+    }
+
+    .animate-repeat {
+      line-height:40px;
+      list-style:none;
+      box-sizing:border-box;
+    }
+
+    .animate-repeat.ng-leave, .animate-repeat.ng-enter {
+        animation: slide-out 1.5s forwards;
+    }
+
+    @keyframes slide-out {
+        0% { transform: translate(0%, 0%); }
+        100% { transform: translate(100%, 20%); }
+    }
+
+    @-webkit-keyframes slide-out {
+        0% { transform: translate(0%, 0%); }
+        100% { transform: translate(100%, 20%); }
+    }
+</style>
+<div ng-controller="editProblemController" flex ng-cloak>
+    <md-toolbar md-theme="default-dark">
+        <div class="md-toolbar-tools" >
+            <h3 style="margin-left: 2%;">Edit Problem: {{ problem.name }}</h3>
+        </div>
+    </md-toolbar>
+    <div class="md-whiteframe-z2" style="margin: 10px">
+        <form md-theme="default" name="form" >
+            <div layout="row" style="padding:2%;">
+                <md-input-container flex="50" class="md-block">
+                    <label>Problem Name</label>
+                    <input ng-model="problem.name" required>
+                </md-input-container>
+
+            </div>
+            <div layout="row" style="padding: 2%">
+                <md-input-container flex class="md-block">
+                    <label>Problem Statement</label>
+                    <textarea ng-model="problem.statement" rows="5" style="height: 150px;" md-select-on-focus></textarea>
+                </md-input-container>
+            </div>
+            <div layout="row" style="padding: 2%;">
+
+                <md-input-container flex="45" class="md-block">
+                    <label>Time Limit</label>
+                    <input ng-model="problem.time_limit" type="number" step="any" required>
+                </md-input-container>
+
+                <md-input-container flex="45" class="md-block">
+                    <label>Points</label>
+                    <input ng-model="problem.points" type="number" required>
+                </md-input-container>
+                <md-button class="md-raised md-primary" ng-click="updateProblem()" style="max-height: 25px;" md-theme="default-form">
+                    Update Problem
+                    <md-tooltip md-direction="left" ng-if="form.$invalid" style="font-size: 1em;">
+
+                        Cannot Save Problem. Please re-check the
+                                                        entries
+                    </md-tooltip>
+                </md-button>
+            </div>
+
+        </form>
+        <div class="md-whiteframe-z1" style="margin: 5px 30px 20px 30px;">
+            <div class="main-fab" md-theme="default-dark" flex-offset="70" style="margin-top: 30px;">
+                <md-button class="md-fab md-accent" title="Add New Testcase" ng-click="addTestcase($event)" style="font-size: 0.9em;">+</md-button>
+            </div>
+            <md-toolbar md-theme="default-dark">
+
+                <div class="md-toolbar-tools">
+                    <h3 style="margin-left: 2%;">Testcases</h3>
+                </div>
+
+
+            </md-toolbar>
+
+                <!--table wrapper starts-->
+            <div class="table-responsive md-whiteframe-z2" layout-padding style="margin: 40px;">
+                <!-- Table starts here -->
+                <!--input type="search" ng-model="query" placeholder="Search" aria-label="filter userList" /-->
+
+                <table class="table table-hover animate-repeat">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Is Used?</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tr ng-repeat="row in testcase" class="animate-repeat">
+                        <td><a href="#">{{ row.id }}</a></td>
+                        <td>{{ row.is_used }}</td>
+                        <td ng-click="deleteTestcase($index, $event)" title="Delete Problem {{ row.name }}"><md-icon md-font-library="material-icons" >delete</md-icon></td>
+                    </tr>
+                </table>
+            </div><!--table wrapper ends-->
+        </div>
+    </div>
+</div>
+

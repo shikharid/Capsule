@@ -24,6 +24,7 @@ class ProblemSerializer(serializers.ModelSerializer):
                   'assignment_id',
                   'name',
                   'statement',
+                  'time_limit',
                   'points', ]
         read_only_fields = ['created_on', 'updated_on']
 
@@ -52,6 +53,7 @@ class EditProblemSerializer(serializers.ModelSerializer):
         model = Problem
         fields = ['name',
                   'statement',
+                  'time_limit',
                   'points', ]
         read_only_fields = ['id', 'assignment_id', 'created_on', 'updated_on']
 
@@ -70,7 +72,8 @@ class TestCaseSerializer(serializers.ModelSerializer):
 class EditTestCaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = TestCase
-        fields = ['input',
+        fields = ['id',
+                  'input',
                   'output',
                   'is_used']
         read_only_fields = ['id', 'problem_id', 'created_on', 'updated_on']

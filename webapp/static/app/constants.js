@@ -32,6 +32,9 @@ angular.module('capsuleApp').constant("PARTIALS",{
     "ASSIGNMENT_LIST": "/static/app/partials/live-assignment.html",
     "ASSIGNMENT_ADD": "/static/app/partials/add-assignment.html",
     "ASSIGNMENT_EDIT": "/static/app/partials/edit-assignment.html",
+    "PROBLEM_ADD": "/static/app/partials/add-problem.html",
+    "PROBLEM_EDIT": "/static/app/partials/edit-problem.html",
+    "TESTCASE_ADD": '/static/app/partials/add-testcase.html',
     "LOGIN": "/static/app/partials/login.html",
     "LOGOUT": "/static/app/partials/500.html"
 });

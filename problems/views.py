@@ -132,6 +132,24 @@ class EditProblems(generics.RetrieveUpdateAPIView):
             raise serializers.ValidationError('Error.No such Problem exists.')
 
 
+class RemoveProblem(generics.DestroyAPIView):
+    # TODO Remove related testcases and submissions
+    serializer_class = EditProblemSerializer
+    permission_classes = [IsFaculty]
+
+    def get_object(self):
+        assignment_id = self.kwargs.get('assignment_id', None)
+        problem_id = self.kwargs.get('problem_id', None)
+        try:
+            assignment = Assignment.objects.get(id=assignment_id, faculty_id=self.request.user)
+            problem_obj = Problem.objects.get(id=problem_id, assignment_id=assignment)
+            return problem_obj
+        except Assignment.DoesNotExist:
+            return TestCase.objects.none()
+        except Problem.DoesNotExist:
+            return TestCase.objects.none()
+
+
 class AddTestCase(generics.CreateAPIView):
     """
     Add's test case after verifying problem and assignment id
@@ -142,6 +160,7 @@ class AddTestCase(generics.CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         request.data['problem_id'] = self.kwargs.get('problem_id', None)
+        request.data['is_used'] = True
 
         try:
             Assignment.objects.get(id=self.kwargs.get('assignment_id', None), faculty_id=self.request.user)

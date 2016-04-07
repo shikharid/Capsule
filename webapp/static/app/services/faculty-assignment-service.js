@@ -21,12 +21,12 @@ function(Restangular){
     }
 
     function getAssignment(assignmentID) {
-        return Restangular.one('capsule').one('assignment', assignmentID).get('edit/');
+        return Restangular.one('capsule').one('assignment', assignmentID).one('edit/').get();
     }
 
     function editAssignment(assignmentID, data) {
         data.deadline = moment(data.deadline).format('YYYY-MM-DD');
         data = JSON.stringify(data);
-        return Restangular.one('capsule').one('assignment', assignmentID).post('edit/', data);
+        return Restangular.one('capsule').one('assignment', assignmentID).one('edit/').customPUT(data);
     }
 }]);

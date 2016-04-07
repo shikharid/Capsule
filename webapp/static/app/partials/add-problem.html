@@ -1,0 +1,55 @@
+<style>
+
+        button, html, input, select, textarea, label {
+            font-family: 'Josefin Slab', serif;
+            font-size: 17px;
+            color: #000000;
+        }
+
+
+</style>
+<div ng-controller="addProblemController" flex ng-cloak >
+    <md-toolbar md-theme="default-dark">
+        <div class="md-toolbar-tools">
+            <h3 style="margin-left: 2%;">Add Problem</h3>
+        </div>
+    </md-toolbar>
+    <div class="md-whiteframe-z2" style="margin: 10px">
+    <form md-theme="default" name="form" >
+        <div layout="row" style="padding:5%;">
+            <md-input-container flex="50" class="md-block">
+                <label>Problem Name</label>
+                <input ng-model="problem.name" required>
+            </md-input-container>
+
+        </div>
+        <div layout="row" style="padding: 5%">
+            <md-input-container flex class="md-block">
+                <label>Problem Statement</label>
+                <textarea ng-model="problem.statement" rows="5" style="height: 150px;" md-select-on-focus></textarea>
+            </md-input-container>
+        </div>
+        <div layout="row" style="padding:5%;">
+
+            <md-input-container flex="45" class="md-block">
+                <label>Time Limit</label>
+                <input ng-model="problem.time_limit" type="number" step="any" required>
+            </md-input-container>
+
+            <md-input-container flex="45" class="md-block">
+                <label>Points</label>
+                <input ng-model="problem.points" type="number" required>
+            </md-input-container>
+            <md-button class="md-raised md-primary" ng-click="submit()" style="max-height: 25px;" md-theme="default-form">
+                Add Problem
+                <md-tooltip md-direction="left" ng-if="form.$invalid" style="font-size: 1em;">
+
+                    Cannot Save Problem. Please re-check the
+                                                    entries
+                </md-tooltip>
+            </md-button>
+        </div>
+
+    </form>
+    </div>
+</div>

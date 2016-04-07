@@ -1,0 +1,132 @@
+
+<style>
+    .main-fab {
+      position:absolute;
+      z-index:200;
+      font-size:30px;
+      left:240px;
+      transform:scale(.88,.88);
+    }
+    a:focus, a:hover {
+        text-decoration: none;
+        border: none;
+    }
+    .table td {
+        border-top: none !important;
+     }
+    .table tr {
+        min-height: 65px;
+        text-align: center;
+        font-size: 1.2em;
+        height: 65px;
+    }
+    .table>thead>tr>th {
+        text-align: center;
+        font-weight: 400;
+        vertical-align: bottom;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    }
+    .animate-container {
+        background:white;
+        border:1px solid black;
+        list-style:none;
+        margin:0;
+        padding:0 10px;
+    }
+
+    .animate-repeat {
+      line-height:40px;
+      list-style:none;
+      box-sizing:border-box;
+    }
+
+    .animate-repeat.ng-leave {
+        animation: slide-out 1.5s forwards;
+    }
+
+    @keyframes slide-out {
+        0% { transform: translate(0%, 0%); }
+        100% { transform: translate(100%, 20%); }
+    }
+
+    @-webkit-keyframes slide-out {
+        0% { transform: translate(0%, 0%); }
+        100% { transform: translate(100%, 20%); }
+    }
+</style>
+<div ng-controller="editAssignmentController" flex ng-cloak>
+    <div class="md-whiteframe-z2">
+    <md-toolbar md-theme="default-dark">
+        <div class="md-toolbar-tools">
+            <h3 style="margin-left: 2%;">Edit Assignment: {{ assignment.name }}</h3>
+        </div>
+    </md-toolbar>
+    <form md-theme="default" name="form" >
+        <div layout="row" style="padding:3%;">
+            <md-input-container flex="50" class="md-block">
+                <label>Assignment Name</label>
+                <input ng-model="assignment.name" required>
+            </md-input-container>
+
+            <md-input-container flex class="md-block">
+                <label>Subject Code</label>
+                <input ng-model="assignment.subject_code" required>
+            </md-input-container>
+        </div>
+            <div layout="row" style="padding:3%;">
+            <md-input-container flex="50" class="md-block">
+                <label>Batch Prefix</label>
+                <input ng-model="assignment.batch_prefix" required>
+            </md-input-container>
+            <md-datepicker ng-model="assignment.deadline" required placeholder="Deadline" flex="30">
+            </md-datepicker>
+            <md-button class="md-raised md-primary" ng-click="updateAssignment()" style="max-height: 25px;" md-theme="default-form">
+            Update Assignment
+            <md-tooltip md-direction="left" ng-if="form.$invalid" style="font-size: 1em;">
+
+                Cannot Save Assignment. Please re-check the
+                                                entries
+            </md-tooltip>
+        </md-button>
+        </div>
+
+    </form>
+    <div class="md-whiteframe-z1" style="margin: 5px 30px 20px 30px;">
+        <div class="main-fab" md-theme="default-dark" flex-offset="70">
+            <md-button class="md-fab md-accent" title="Add New Assignment" ng-click="addProblem()" style="margin-top: 30px;font-size: 0.9em;">+</md-button>
+        </div>
+        <md-toolbar md-theme="default-dark">
+
+            <div class="md-toolbar-tools">
+                <h3 style="margin-left: 2%;">Problems</h3>
+            </div>
+
+
+        </md-toolbar>
+
+            <!--table wrapper starts-->
+        <div class="table-responsive md-whiteframe-z2" layout-padding style="margin: 40px;">
+            <!-- Table starts here -->
+            <!--input type="search" ng-model="query" placeholder="Search" aria-label="filter userList" /-->
+
+            <table class="table table-hover animate-repeat">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Points</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tr ng-repeat="row in problems" ng-click="gotoProblem($index)" class="animate-repeat">
+                    <td><a href="#">{{ row.id }}</a></td>
+                    <td>{{ row.name }}</td>
+                    <td>{{ row.points }}</td>
+                    <td ng-click="deleteProblem($index, $event)" title="Delete Problem {{ row.name }}"><md-icon md-font-library="material-icons" >delete</md-icon></td>
+                </tr>
+            </table>
+        </div><!--table wrapper ends-->
+    </div>
+    </div>
+
+</div>

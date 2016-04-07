@@ -54,6 +54,14 @@ angular.module('capsuleApp').config(['URLS', 'PARTIALS', '$routeProvider', '$loc
                 controller: 'editAssignmentController',
                 templateUrl: PARTIALS.ASSIGNMENT_EDIT
             }).
+            when(ADMIN.ADD_P, {
+                controller: 'addProblemController',
+                templateUrl: PARTIALS.PROBLEM_ADD
+            }).
+            when(ADMIN.EDIT_P, {
+                controller: 'editProblemController',
+                templateUrl: PARTIALS.PROBLEM_EDIT
+            }).
             otherwise({
                 redirectTo: URLS.INDEX
             });
