@@ -3,8 +3,9 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from authentication.models import User
-from problems.models import Problem
-from judge.tasks import grade_c_cpp
+from problems.models import Problem, Assignment
+from judge.tasks import grade_c_cpp, update_score
+from review.models import PlagiarismRequest
 
 
 class Submission(models.Model):
@@ -62,3 +63,10 @@ class Submission(models.Model):
 def run_judge(sender, instance, created, **kwargs):
     if created:
         grade_c_cpp.delay(instance)
+
+
+@receiver(post_save, sender=Assignment)
+def run_ranker(sender, instance, created, **kwargs):
+    if instance.review_done:
+        update_score.delay(instance)
+

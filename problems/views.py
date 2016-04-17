@@ -74,7 +74,9 @@ class ListAssignment(generics.ListAPIView):
     permission_classes = [IsFaculty]
 
     def get_queryset(self):
-        return Assignment.objects.filter(faculty_id=self.request.user)
+        query_filter = Q(deadline__gte=datetime.now().date()) & Q(faculty_id=self.request.user)
+        queryset = Assignment.objects.filter(query_filter)
+        return queryset
 
 
 class EditAssignment(generics.RetrieveUpdateAPIView):

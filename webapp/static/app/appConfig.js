@@ -46,6 +46,10 @@ angular.module('capsuleApp').config(['URLS', 'PARTIALS', '$routeProvider', '$loc
                 controller: 'assignmentFacultyController',
                 templateUrl: PARTIALS.ASSIGNMENT_LIST
             }).
+            when(ADMIN.COMP_A, {
+               controller: 'reviewAssignmentListController',
+                t
+            }).
             when(ADMIN.ADD_A, {
                 controller: 'addAssignmentController',
                 templateUrl: PARTIALS.ASSIGNMENT_ADD

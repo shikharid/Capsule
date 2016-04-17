@@ -3,15 +3,19 @@ import resource
 import subprocess
 import tempfile
 import cStringIO
-from celery.utils.log import get_task_logger
 import time
+
+from celery.utils.log import get_task_logger
+from django.db import transaction
+
+from authentication.models import User, UserScore
 from webapp.celery import app
-from problems.models import TestCase
+from problems.models import TestCase, ProblemScore, Problem, AssignmentScore
 
 logger = get_task_logger(__name__)
 
-
 @app.task
+@transaction.atomic()
 def grade_c_cpp(submission_obj):
     """
     :param submission_id: Database ID of submission
@@ -114,6 +118,13 @@ def grade_c_cpp(submission_obj):
     # logger.error('Total memory is {0}'.format(total_memory))
 
     if flag:
+
+        instance, created = ProblemScore.objects.get_or_create(problem=submission_obj.problem_id,
+                                                               student=submission_obj.user_id)
+        instance.score = submission_obj.problem_id.points if submission_obj.problem_id.points > instance.score \
+            else instance.score
+        instance.save()
+
         submission_obj.verdict = 1
         submission_obj.error_info = 'None.Solution Accepted'
         submission_obj.time_taken = total_time
@@ -125,3 +136,43 @@ def grade_c_cpp(submission_obj):
         submission_obj.time_taken = total_time
         submission_obj.save()
         return False
+
+
+@app.task
+@transaction.atomic()
+def update_score(assignment):
+
+    if not assignment.review_done:
+        return False
+
+    user_queryset = User.objects.filter(member_id__startswith=assignment.batch_prefix)
+    user_list = user_queryset.values_list('member_id', flat=True)
+    problem_queryset = Problem.objects.filter(assignment_id=assignment)
+    problem_list = problem_queryset.values_list('id', flat=True)
+
+    # Gets point for every problem
+    def get_points(user_id, problem):
+        try:
+            score_instance = ProblemScore.objects.get(student__member_id=user_id, problem__id=problem)
+            return score_instance.score
+        except ProblemScore.DoesNotExist:
+            return 0
+
+    def get_score(user_id):
+        total = 0
+        for problem in problem_list:
+            total += get_points(user_id, problem)
+        return total
+
+    score = {user: get_score(user) for user in user_list}
+    # Update Assignment Score
+    for user in user_queryset:
+        instance = AssignmentScore(student=user, assignment=assignment, score=score[user.member_id])
+        instance.save()
+
+    # Update User Score
+    for user in user_queryset:
+        instance, created = UserScore.objects.get_or_create(user=user)
+        instance.score += score[user.member_id]
+        instance.save()
+    return True

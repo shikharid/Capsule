@@ -5,7 +5,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from authentication.models import User
+from authentication.models import User, UserScore
 
 
 class UserCreationForm(forms.ModelForm):
@@ -81,6 +81,11 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ()
 
 
+class UserScoreAdmin(admin.ModelAdmin):
+    list_display = ('user',
+                    'score')
+
 admin.site.register(User, UserAdmin)
+admin.site.register(UserScore, UserScoreAdmin)
 admin.site.unregister(Group)
 

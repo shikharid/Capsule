@@ -1,0 +1,88 @@
+Design bugs pending.
+Make a list if necessary.
+Currently no check on post requests if owner is the requesting entity.
+Say fuck you to people who say that it is buggy, coz it ain't.I just kept it for next phase.. if and when it goes in production env.
+Teacher Portal(MVP): - 30 hrs
+	1. Assignments add/edit - Done
+	2. Problems add/edit - Done
+	3. TC add/edit - Done
+	4. Review assignment: - Pending - 30 hrs
+		4.1. Show list of assignments (1 hr API, 1 hr frontend)
+		4.2. Show list of students (2 hr API, 1 hr frontend)
+		4.3. Review section assignment based (3 hr API, 2 hr frontend)
+		4.4. Review section problem based (1 hr API, 1 hr frontend)
+		4.5. Send plagiarism check request (4 hr API, .25 hr frontend)
+		4.6. Show plagiarism task status (0.5 hr API, 0.5 hr frontend)
+		Show flag on students caught in cheating (2 hr API, 2 hr frontend)
+		Show flag on submissions caught in cheating (1 hr API, 1 hr frontend)
+		Give link to submission which was found to be matching (0.5 hr API, 2 hr frontend)
+		Give option to cancel problem score (1 hr API, 1 hr frontend)
+		Give option to cancel assignment score (1 hr API, 1 hr frontend)
+	5. Code editor - Done
+	6. Logout
+
+Review assignment API Part:
+	1. Return list of assignments
+	2. Return list of students who submitted
+	3. Add review app
+Tasks:
+1.Mark review complete for assignment.Add task for mailing review report
+2.Mail review report for student assignment
+3.Mail review report for student problem
+4.Add plagiarism checker - Done
+
+Review app API design:
+	1.List Assignment - review/list-assignment - returns list of assignments - DONE
+
+	2.List students - review/<assignment-id>/list-assignment - Returns list of students with scores - DONE
+
+	3.Review complete - review/<assignment_id> - Mark review as complete - DONE
+		- POST: review = True
+
+	3.Plagiarism status - review/<assignment-id>/plagiarism-request - DONE
+		GET Request - boolean telling yes/no
+		POST - adds plagiarism check request for assignment if not already done
+
+	4.Review student - review/<assignment-id>/<student-id>/ - Done
+		GET: Returns list of submissions, status, total score, plag flag
+	5.Review student - review/<assignment_id>/<student_id>/review
+	7.Review submission: review/<assignment-id>/<student-id>/<problem-id>/review
+
+	5.Plag flag status student - review/<assignment-id>/<student-id>/plagiarism - Done
+		GET: status of plagiarism check
+	6.Plag flag student submission - review/<assignment-id>/<student-id>/<problem-id>/plagiarism
+		GET: status of plagiarism check  - Done
+			Response: {
+				"status" : true/false,
+				"caughtWith": [ {
+						"studentID": <StudentID>,
+						"submissionID": <SubmissionID>,
+						"Percent Match": <PercentMatch>
+				}
+				]
+			}
+			Only returns student with which highest match has been found
+	7.Review submission: review/<assignment-id>/<student-id>/<problem-id>/review
+		GET: returns submission verdict and code
+		POST: Mails student teachers review
+
+	8.Reduce score: review/<assignment-id>/<student-id>/<problem-id>/reduce/
+		POST: reduces students score, mails student about it
+
+
+
+
+
+
+
+
+
+
+
+Student Portal(MVP): - 8 hr
+	1. Show live assignments - Done
+	2. Show problems - Done
+	3. Show editor for problems - (Front end pending) (3 hr frontend)
+	4. Show ranklist (Assignment based/ prefix based/ Overall) - Pending ( Both API/Frontend) (3 hr API, 2 hr frontend)
+	5. Common code editor - Done
+	6. Logout

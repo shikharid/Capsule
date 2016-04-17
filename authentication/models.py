@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.core.validators import RegexValidator
 from django.core.urlresolvers import reverse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 NAME_REGEX = RegexValidator(
     regex=r'^[a-zA-Z ]+$',
@@ -94,4 +96,21 @@ class User(AbstractBaseUser):
 
     def get_absolute_url(self):
         return reverse('update_profile', kwargs={'pk': self.id})
+
+
+class UserScore(models.Model):
+    user = models.ForeignKey(User)
+    score = models.IntegerField(default=0)
+
+    created_on = models.DateField(auto_now_add=True)
+    updated_on = models.DateField(auto_now=True)
+
+
+@receiver(post_save, sender=User)
+def create_rank(sender, instance, created, **kwargs):
+    if created:
+        score_instance = UserScore(user=instance)
+        score_instance.score = 0
+        score_instance.save()
+
 

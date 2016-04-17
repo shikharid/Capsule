@@ -1,4 +1,5 @@
 import os
+
 from django.core.validators import MinValueValidator
 from django.db import models
 from authentication.models import User
@@ -22,6 +23,7 @@ class Assignment(models.Model):
     subject_code = models.CharField(blank=True, null=True, max_length=15)
     batch_prefix = models.CharField(max_length=50)
     deadline = models.DateField(blank=True, null=True)
+    review_done = models.BooleanField(default=False)
 
     created_on = models.DateField(auto_now=True)
     updated_on = models.DateField(auto_now_add=True)
@@ -74,3 +76,27 @@ class TestCase(models.Model):
 
     def __unicode__(self):
         return '{0} TestCase'.format(self.problem_id.name)
+
+
+class AssignmentScore(models.Model):
+    """
+    Stores assignment score for students
+    """
+    student = models.ForeignKey(User)
+    assignment = models.ForeignKey(Assignment)
+    score = models.IntegerField(default=0)
+
+    class Meta:
+        unique_together = (("student", "assignment"),)
+
+
+class ProblemScore(models.Model):
+    """
+    Stores problem score for students
+    """
+    student = models.ForeignKey(User)
+    problem = models.ForeignKey(Problem)
+    score = models.IntegerField(default=0)
+
+    class Meta:
+        unique_together = (("student", "problem"),)
