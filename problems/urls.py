@@ -13,6 +13,7 @@ urlpatterns = patterns(
     url(r'^list-assignment/$', views.ListAssignment.as_view(), name='list-assignment'),
 
     url(r'^assignment/(?P<pk>[\d]+)/edit/$', views.EditAssignment.as_view(), name='edit-assignment'),
+    url(r'^problem/(?P<pk>[\d]+)/$', views.GetProblem.as_view(), name='get-problem'),
 
     url(r'^assignment/(?P<assignment_id>[\d]+)/problems/$', views.ListProblems.as_view(), name='list-problem'),
     url(r'^assignment/(?P<assignment_id>[\d]+)/problems/add/$',

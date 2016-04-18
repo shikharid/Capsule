@@ -1,8 +1,9 @@
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from judge.models import Submission
 
-from judge.serializers import SubmissionSerializer
+from judge.serializers import SubmissionSerializer, SubmissionStatusSerializer
 from problems.models import Problem, Assignment
 
 
@@ -12,7 +13,6 @@ class SubmissionView(generics.CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         try:
-            problem_obj = Problem.objects.get(id=self.kwargs.get('problem_id', None))
             assignment_obj = Assignment.objects.get(id=self.kwargs.get('assignment_id', None))
             batch_prefix = assignment_obj.batch_prefix
 
@@ -34,4 +34,10 @@ class SubmissionView(generics.CreateAPIView):
         except Assignment.DoesNotExist:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-# class SubmissionStatusAPIView(generics.CreateAPIView)
+
+class SubmissionStatusAPIView(generics.RetrieveAPIView):
+    serializer_class = SubmissionStatusSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Submission.objects.filter(user_id=self.request.user)

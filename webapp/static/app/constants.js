@@ -6,6 +6,7 @@ angular.module('capsuleApp').constant("URLS",{
     "EDITOR": "/editor",
     "PENDING": "/pending-assignment",
     "PENDING_PROBLEMS": "/pending-assignment/:id",
+    "SOLVE_PROBLEM": "/pending-assignment/:id/:problemID",
     "LOGOUT": "/logout",
     "BASE_URL": "http://127.0.0.1:8000/api/"
 });
@@ -18,9 +19,10 @@ angular.module('capsuleApp').constant("ADMIN",{
         "EDIT_P": "/assignment/:assignmentID/problems/:problemID",
         "EDIT_T": "/assignment/:assignmentID/problems/:problemID/testcase/:testcaseID",
         "ADD_T": "/assignment/:assignmentID/problems/:problemID/testcase/add",
-        "COMPLETE_A": "assignment/evaluate",
-        "EVAL_A": "assignment/evaluate/:assignmentID",
-        "REVIEW_A": "assignment/evaluate/:assignmentID/:studentID"
+        "COMPLETE_A": "/review",
+        "EVAL_A": "/review/:assignmentID",
+        "REVIEW_A": "/review/:assignmentID/:studentID",
+        "REVIEW_P": "/review/:assignmentID/:studentID/:problemID"
     }
 );
 
@@ -30,6 +32,10 @@ angular.module('capsuleApp').constant("PARTIALS",{
     "PENDING": "/static/app/partials/pending-assignment.html",
     "PROBLEM_LIST": "/static/app/partials/problem-list.html",
     "ASSIGNMENT_LIST": "/static/app/partials/live-assignment.html",
+    "COMP_ASSIGN_LIST": "/static/app/partials/dead-assignment.html",
+    "REVIEW_ASS": "/static/app/partials/review-assignment.html",
+    "REVIEW_STU": "/static/app/partials/review-submission.html",
+    "REVIEW_SUB": "/static/app/partials/review-code.html",
     "ASSIGNMENT_ADD": "/static/app/partials/add-assignment.html",
     "ASSIGNMENT_EDIT": "/static/app/partials/edit-assignment.html",
     "PROBLEM_ADD": "/static/app/partials/add-problem.html",

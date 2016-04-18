@@ -7,11 +7,63 @@ function(Restangular){
         getFacultyAssignmentList: getFacultyAssignmentList,
         addAssignment: addAssignment,
         editAssignment: editAssignment,
-        getAssignment: getAssignment
+        getAssignment: getAssignment,
+        getCompletedAssignmentList: getCompletedAssignmentList,
+        sendPlagiarismCheckRequest: sendPlagiarismCheckRequest,
+        getPlagCheckStatus: getPlagCheckStatus,
+        getStudentList: getStudentList,
+        getSubmissionList: getSubmissionList,
+        sendAssignmentReview: sendAssignmentReview,
+        sendSubmissionReview: sendSubmissionReview,
+        reduceSubmissionScore: reduceSubmissionScore,
+        getSubmissionMatch: getSubmissionMatch,
+        markReviewDone: markReviewDone
     };
 
     function getFacultyAssignmentList() {
         return Problem.get('list-assignment/');
+    }
+
+    function getSubmissionMatch(assignmentID, studentID, problemID) {
+        return Restangular.one('capsule').one('review', assignmentID).one(studentID).one(problemID + '/').get();
+    }
+
+    function markReviewDone(assignmentID) {
+        return Restangular.one('capsule').one('review', assignmentID).one('mark-review-done/').customPOST();
+    }
+
+    function sendAssignmentReview(assignmentID, studentID, review) {
+        console.log("Here");
+        return Restangular.one('capsule').one('review', assignmentID).one(studentID).one('mail/').customPOST({"review": review});
+    }
+
+    function sendSubmissionReview(assignmentID, studentID, problemID, review) {
+        return Restangular.one('capsule').one('review', assignmentID).one(studentID).one(problemID).one('mail/').customPOST({"review": review});
+    }
+
+    function reduceSubmissionScore(assignmentID, studentID, problemID, score) {
+        return Restangular.one('capsule').one('review', assignmentID).one(studentID).one(problemID).one('reduce/').customPOST({"points": score});
+    }
+
+    function getCompletedAssignmentList() {
+        return Problem.get('review/assignment-list/');
+    }
+
+    function getStudentList(assignmentID) {
+        return Restangular.one('capsule').one('review', assignmentID).one('student-list/').get();
+    }
+
+    function getSubmissionList(assignmentID, studentID) {
+        return Restangular.one('capsule').one('review', assignmentID).one(studentID).one('code-list/').get();
+    }
+
+    function sendPlagiarismCheckRequest(assignmentID) {
+        return Restangular.one('capsule').one('review', assignmentID).one('plagiarism-request/').customPOST();
+    }
+
+
+    function getPlagCheckStatus(assignmentID) {
+        return Restangular.one('capsule').one('review', assignmentID).one('plagiarism-request-status/').get();
     }
 
     function addAssignment(data) {

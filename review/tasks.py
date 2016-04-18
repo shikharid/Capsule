@@ -1,12 +1,12 @@
 from difflib import SequenceMatcher
+import time
+
 from django.db import transaction
 from django.db.models import Q
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from authentication.models import User
 from judge.models import Submission
 from problems.models import Problem
-from review.models import PlagiarismScore, PlagiarismRequest
+from review.models import PlagiarismScore
 from webapp.celery import app
 
 
@@ -16,6 +16,8 @@ def plagiarism_check(plagiarism_instance):
     """
     :param plagiarism_instance plagiarism request instance
     """
+
+    time.sleep(7)  # Humanize check time for presentation
     assignment = plagiarism_instance.assignment
     user_queryset = User.objects.filter(member_id__startswith=assignment.batch_prefix)
     user_list = user_queryset.values_list('member_id', flat=True)

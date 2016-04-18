@@ -2,6 +2,7 @@ from datetime import datetime
 from django.db.models import Q
 
 from rest_framework import generics, serializers
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from problems.models import Assignment, Problem, TestCase
@@ -114,6 +115,13 @@ class AddProblems(generics.CreateAPIView):
             request.data['assignment_id'] = None
 
         return super(AddProblems, self).create(request, *args, **kwargs)
+
+
+class GetProblem(generics.RetrieveAPIView):
+
+    queryset = Problem.objects.all()
+    serializer_class = EditProblemSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class EditProblems(generics.RetrieveUpdateAPIView):

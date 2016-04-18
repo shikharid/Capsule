@@ -128,6 +128,7 @@ def grade_c_cpp(submission_obj):
         submission_obj.verdict = 1
         submission_obj.error_info = 'None.Solution Accepted'
         submission_obj.time_taken = total_time
+        submission_obj.memory_taken = total_memory
         submission_obj.save()
         return True
     else:

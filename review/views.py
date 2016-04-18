@@ -10,7 +10,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import status
-from judge.serializers import SubmissionSerializer
+from judge.serializers import SubmissionStatusSerializer
 
 from problems.models import Assignment, Problem, ProblemScore
 from judge.models import Submission
@@ -26,7 +26,7 @@ class ListAssignmentAPIView(generics.ListAPIView):
     permission_classes = [IsFaculty]
 
     def get_queryset(self):
-        query_filter = Q(deadline__lt=datetime.now().date()) & Q(faculty_id=self.request.user)
+        query_filter = Q(deadline__lt=datetime.now().date()) & Q(faculty_id=self.request.user) & Q(review_done=False)
         queryset = Assignment.objects.filter(query_filter)
         return queryset
 
@@ -37,7 +37,6 @@ class ListStudentAPIView(generics.ListAPIView):
 
     def list(self, request, *args, **kwargs):
         assignment_id = self.kwargs.get('assignment_id', None)
-        print "assignment", assignment_id
         if assignment_id is None:
             return Response({'error': 'No assignment ID found'})
 
@@ -58,7 +57,8 @@ class ListStudentAPIView(generics.ListAPIView):
             user_id = submission.user_id.member_id
             problem_id = submission.problem_id.id
             if score[user_id][problem_id] is 0:
-                score[user_id][problem_id] = submission.problem_id.points
+                score[user_id][problem_id] = ProblemScore.objects.get(student=submission.user_id,
+                                                                      problem=submission.problem_id).score
 
         for user in user_list:
             points = 0
@@ -79,7 +79,7 @@ class ReviewAssignmentViewSet(GenericViewSet):
     serializer_class = AssignmentSerializer
     permission_classes = [IsFaculty, IsOwner]
 
-    @detail_route(methods=['get'], url_path='mark-review-done')
+    @detail_route(methods=['post'], url_path='mark-review-done')
     def mark_review_done(self, request, *args, **kwargs):
         assignment_id = self.kwargs.get('assignment_id', None)
         if assignment_id is None:
@@ -115,9 +115,10 @@ class ReviewAssignmentViewSet(GenericViewSet):
         assignment = get_object_or_404(Assignment.objects.all(), id=assignment_id)
         try:
             instance = PlagiarismRequest.objects.get(assignment=assignment)
-            resp = {'status': 'success', 'message': 'Plagiarism check in progress'}
+            resp = {'status': 'success', 'message': 'Plagiarism check in progress', 'state': False}
             if instance.status:
                 resp['message'] = 'Plagiarism check complete'
+                resp['state'] = True
             return Response(resp, status=status.HTTP_200_OK)
         except PlagiarismRequest.DoesNotExist:
             resp = {'status': 'failure', 'message': 'No plagiarism check request found'}
@@ -152,7 +153,7 @@ class ReviewStudentViewSet(GenericViewSet):
             if not submission_found[submission.problem_id.id]:
                 submission_latest.append(submission)
                 submission_found[submission.problem_id.id] = True
-        serializer = SubmissionSerializer(submission_latest, many=True)
+        serializer = SubmissionStatusSerializer(submission_latest, many=True)
         return Response(serializer.data)
 
     @detail_route(methods=['get'], url_path='(?P<problem_id>[\d]+)')
@@ -172,8 +173,8 @@ class ReviewStudentViewSet(GenericViewSet):
         filter_query = Q(problem_id=problem) & Q(user_id=score.student_b) & Q(verdict=Submission.AC)
         submission_b = Submission.objects.filter(filter_query).order_by('-updated_on')[:1].get()
 
-        resp['submission'] = SubmissionSerializer(submission_a).data
-        resp['caughtWith'] = SubmissionSerializer(submission_b).data
+        resp['submission'] = SubmissionStatusSerializer(submission_a).data
+        resp['caughtWith'] = SubmissionStatusSerializer(submission_b).data
 
         return Response(resp)
 
@@ -185,17 +186,27 @@ class ReviewStudentViewSet(GenericViewSet):
 
         student = get_object_or_404(User.objects.all(), member_id=student_id)
         problem = get_object_or_404(Problem.objects.all(), id=problem_id)
-        points = self.request.data.get('points', None)
-        if points is None or not (0 <= points <= problem.points):
-            return Response({'status': 'failure', 'message': 'Invalid point allocation'},
+        assignment = problem.assignment_id
+        try:
+            instance = PlagiarismRequest.objects.get(assignment=assignment)
+            if not instance.status:
+                return Response({'status': 'failure', 'message': 'Plagiarism Check not done'},
+                                status=status.HTTP_400_BAD_REQUEST)
+            points = self.request.data.get('points', None)
+            print "points", points
+            if points is None or not (0 <= points <= problem.points):
+                return Response({'status': 'failure', 'message': 'Invalid point allocation'},
+                                status=status.HTTP_400_BAD_REQUEST)
+            problem_score = get_object_or_404(ProblemScore, student=student, problem=problem)
+            problem_score.score = points
+            problem_score.save()
+            return Response({'status': 'success', 'message': 'Points Updated'},
+                            status=status.HTTP_200_OK)
+        except PlagiarismRequest.DoesNotExist:
+            return Response({'status': 'failure', 'message': 'Plagiarism Check not done'},
                             status=status.HTTP_400_BAD_REQUEST)
-        problem_score = get_object_or_404(ProblemScore, student=student, problem=problem)
-        problem_score.score = points
-        problem_score.save()
-        return Response({'status': 'success', 'message': 'Points Updated'},
-                        status=status.HTTP_200_OK)
 
-    @detail_route(methods=['post'], url_path='review')
+    @detail_route(methods=['post'], url_path='mail')
     def assignment_review(self, request, *args, **kwargs):
         review = self.request.data.get('review', None)
         if not review:
@@ -211,8 +222,8 @@ class ReviewStudentViewSet(GenericViewSet):
         return Response({'status': 'success', 'message': 'Review added'},
                         status=status.HTTP_201_CREATED)
 
-    @detail_route(methods=['post'], url_path='(?P<problem_id>[\d]+)/review')
-    def assignment_review(self, request, *args, **kwargs):
+    @detail_route(methods=['post'], url_path='(?P<problem_id>[\d]+)/mail')
+    def submission_review(self, request, *args, **kwargs):
         review = self.request.data.get('review', None)
         if not review:
             return Response({'status': 'failure'}, status=status.HTTP_400_BAD_REQUEST)

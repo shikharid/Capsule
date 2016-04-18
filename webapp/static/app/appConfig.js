@@ -6,7 +6,7 @@ angular.module('capsuleApp').config(['URLS', 'PARTIALS', '$routeProvider', '$loc
         RestangularProvider.setBaseUrl(URLS.BASE_URL);
 
         $mdThemingProvider.theme('landingTheme')
-            .primaryPalette('light-blue')
+            .primaryPalette('indigo')
             .backgroundPalette('blue', {default: '400'});
 
         $mdThemingProvider.theme('loginCardTheme')
@@ -14,9 +14,17 @@ angular.module('capsuleApp').config(['URLS', 'PARTIALS', '$routeProvider', '$loc
             .warnPalette('green');
 
         $mdThemingProvider.theme('default').primaryPalette('light-blue').warnPalette('pink');
-        $mdThemingProvider.theme('default-form').primaryPalette('indigo');
+        $mdThemingProvider.theme('default-form').primaryPalette('cyan');
+        $mdThemingProvider.theme('code-dark').primaryPalette('blue-grey', {
+                  'default': '400', // by default use shade 400 from the pink palette for primary intentions
+                  'hue-1': '100', // use shade 100 for the <code>md-hue-1</code> class
+                  'hue-2': '600', // use shade 600 for the <code>md-hue-2</code> class
+                  'hue-3': 'A100' // use shade A100 for the <code>md-hue-3</code> class
+                }).warnPalette('deep-orange').dark();
 
         $mdThemingProvider.theme('default-dark').primaryPalette('blue-grey').accentPalette('red').dark();
+        $mdThemingProvider.theme('notify').primaryPalette('light-green').accentPalette('deep-orange')
+            .warnPalette('amber');
 
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
@@ -46,9 +54,21 @@ angular.module('capsuleApp').config(['URLS', 'PARTIALS', '$routeProvider', '$loc
                 controller: 'assignmentFacultyController',
                 templateUrl: PARTIALS.ASSIGNMENT_LIST
             }).
-            when(ADMIN.COMP_A, {
-               controller: 'reviewAssignmentListController',
-                t
+            when(ADMIN.COMPLETE_A, {
+                controller: 'reviewAssignmentListController',
+                templateUrl: PARTIALS.COMP_ASSIGN_LIST
+            }).
+            when(ADMIN.EVAL_A, {
+                controller: 'reviewAssignmentController',
+                templateUrl: PARTIALS.REVIEW_ASS
+            }).
+            when(ADMIN.REVIEW_A, {
+                controller: 'reviewStudentAssignmentController',
+                templateUrl: PARTIALS.REVIEW_STU
+            }).
+            when(ADMIN.REVIEW_P, {
+                controller: 'reviewStudentSubmissionController',
+                templateUrl: PARTIALS.REVIEW_SUB
             }).
             when(ADMIN.ADD_A, {
                 controller: 'addAssignmentController',
