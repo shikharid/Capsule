@@ -1,0 +1,47 @@
+<style>
+
+        button, html, input, select, textarea, label {
+            font-family: 'Josefin Slab', serif;
+            font-size: 17px;
+        }
+
+</style>
+<div ng-controller="addAssignmentController" flex ng-cloak >
+    <md-toolbar md-theme="default-dark">
+        <div class="md-toolbar-tools">
+            <h3 style="margin-left: 2%;">Add Assignment</h3>
+        </div>
+    </md-toolbar>
+    <div class="md-whiteframe-z2" style="margin: 10px">
+    <form md-theme="default" name="form" >
+        <div layout="row" style="padding:5%;">
+            <md-input-container flex="50" class="md-block">
+                <label>Assignment Name</label>
+                <input ng-model="assignment.name" required>
+            </md-input-container>
+
+            <md-input-container flex class="md-block">
+                <label>Subject Code</label>
+                <input ng-model="assignment.subject_code" required>
+            </md-input-container>
+        </div>
+            <div layout="row" style="padding:5%;">
+            <md-input-container flex="50" class="md-block">
+                <label>Batch Prefix</label>
+                <input ng-model="assignment.batch_prefix" required>
+            </md-input-container>
+            <md-datepicker ng-model="assignment.deadline" required placeholder="Deadline" title="Deadline" flex="30">
+            </md-datepicker>
+            <md-button class="md-raised md-primary" ng-click="submit()" style="max-height: 25px;" md-theme="default-form">
+            Add Assignment
+            <md-tooltip md-direction="left" ng-if="form.$invalid" style="font-size: 1em;">
+
+                Cannot Save Assignment. Please re-check the
+                                                entries
+            </md-tooltip>
+        </md-button>
+        </div>
+
+    </form>
+    </div>
+</div>

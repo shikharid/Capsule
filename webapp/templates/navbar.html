@@ -1,0 +1,22 @@
+<style>
+    h1 span.logo-text{
+  display: none;
+}
+</style>
+    <md-toolbar md-scroll-shrink md-shrink-speed-factor="0.1">
+    <div class="md-toolbar-tools">
+      <span><a href="/"> <img src="{{ STATIC_URL }}app/images/mini-logo-sitewide.png" alt="Capsule"></a> </span>
+      <!-- fill up the space between left and right area -->
+      <span flex></span>
+        <md-button class="md-fab md-mini" ng-href="settings/" >
+            <md-icon md-font-library="material-icons" style="color:white;" aria-label="Settings">settings</md-icon>
+        </md-button>
+        <md-button class="md-fab md-primary md-mini" ng-href="editor/">
+          <md-icon md-font-library="material-icons" style="color:white;" aria-label="Editor">insert_drive_file</md-icon>
+        </md-button>
+        <md-button class="md-fab md-mini" ng-disabled="true">
+            <md-icon md-font-library="material-icons" aria-label="Schedule">insert_invitation</md-icon>
+        </md-button>
+
+    </div>
+  </md-toolbar>

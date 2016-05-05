@@ -1,0 +1,55 @@
+<!doctype html>
+<html ng-app="capsuleApp">
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>Capsule</title>
+    <base href="/">
+    {% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}app/css/loading-bar.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/libs/angular-material.min.css">
+    {% endblock %}
+
+    {% block js %}
+        <script src="{{ STATIC_URL }}js/libs/jquery.min.js"></script>
+        <script src="{{ STATIC_URL }}app/js/moment.js"></script>
+        <script src="{{ STATIC_URL }}js/libs/bootstrap.min.js"></script>
+
+    {% endblock %}
+
+    <style>
+        body {
+            font-family: 'Josefin Slab', serif;
+        }
+    </style>
+
+</head>
+<body md-theme="landingTheme">
+
+    {% block header %}
+        {% if user.is_authenticated %}
+            {% include 'navbar.html' %}
+        {% endif %}
+    {% endblock %}
+
+    {% block content %}
+        <div layout="row" style="min-height: 100vh;">
+            {% if user.is_authenticated %}
+                {% include 'sidebar.html' %}
+            {% endif %}
+            <div ng-view flex style="min-height: 100vh;"></div>
+        </div>
+    {% endblock %}
+
+    {% block footer %}
+	{% include 'javascript.html' %}
+    {% endblock %}
+</body>
+</html>

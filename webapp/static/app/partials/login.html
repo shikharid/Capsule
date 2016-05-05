@@ -1,0 +1,60 @@
+<style>
+    .login-form-text{
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 1.05rem;
+        margin: auto;
+    }
+    .input-field label {
+      font-weight: 100;
+      letter-spacing: 1px;
+      margin: auto;
+    }
+    .login-form {
+        padding: 50px;
+    }
+</style>
+<div data-ng-controller="LoginController">
+<md-content layout="row" layout-align="center center">
+    <div layout="column" style="min-height: 100vh;" class="login-form">
+    <md-card md-theme="loginCardTheme" class="md-whiteframe-24dp">
+        <div flex="40" class="md-media-sm card-media" style="margin: auto; padding: 10px;">
+            <img ng-src="static/app/images/login-logo.png">
+        </div>
+        <md-card-title>
+            <md-card-title-text>
+                <span class="login-form-text">Capsule-Automatic Code Grader</span>
+            </md-card-title-text>
+
+        </md-card-title>
+        <md-card-content>
+            <form role="form">
+                <md-content ng-if="!!formError">
+                    <hr/>
+                        <strong>{{ formError }}</strong>
+                </md-content>
+                <hr/>
+                <div layout="row" class="input-field">
+                    <md-input-container flex="90">
+                        <label>College ID</label>
+                        <md-icon md-svg-src="static/app/images/ic_person_24px.svg" class="email"></md-icon>
+                        <input ng-model="user.member_id" type="text" required/>
+                    </md-input-container>
+                </div>
+                <div layout="row" class="input-field">
+                    <md-input-container flex="90">
+                        <label>Password</label>
+                        <md-icon md-svg-src="static/app/images/ic_lock_outline_black_24px.svg" class="email"></md-icon>
+                        <input ng-model="user.password" type="password" required/>
+                    </md-input-container>
+                </div>
+                <div layout="row">
+                    <md-button type="submit" class="md-raised md-warn" flex="90" ng-click="login()">
+                        <span style="color:white;">Login</span></md-button>
+                </div>
+            </form>
+        </md-card-content>
+    </md-card>
+    </div>
+</md-content>
+</div>

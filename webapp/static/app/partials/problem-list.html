@@ -1,0 +1,27 @@
+<div layout="column">
+
+<div ng-controller="problemListController" ng-cloak md-theme="code-dark md-hue-3">
+    <md-toolbar md-theme="default-dark">
+
+        <div class="md-toolbar-tools">
+            <h3 style="margin-left: 2%;">Problems</h3>
+        </div>
+
+
+    </md-toolbar>
+    <hr/>
+    <md-content>
+        <md-list >
+            <md-list-item ng-repeat="problem in problems" ng-click="goToProblem($index)">
+                <div class="md-list-item-text" >
+                    <h3>{{ problem.name }}</h3>
+                    <hr/>
+                    <h5>Time Limit: {{ problem.time_limit }} seconds</h5>
+                    <hr/>
+                    <h5>Points: {{ problem.points }}</h5>
+                  </div>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</div>
+</div>

@@ -1,0 +1,90 @@
+
+<style>
+    .main-fab {
+      position:absolute;
+      z-index:200;
+      font-size:30px;
+      left:240px;
+      transform:scale(.88,.88);
+    }
+    a:focus, a:hover {
+        text-decoration: none;
+        border: none;
+    }
+    .table td {
+        border-top: none !important;
+     }
+    .table tr {
+        min-height: 65px;
+        text-align: center;
+        font-size: 1.2em;
+        height: 65px;
+    }
+
+    .table>thead>tr>th {
+        text-align: center;
+        font-weight: 400;
+        vertical-align: bottom;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    }
+</style>
+<div ng-controller="reviewStudentAssignmentController" flex ng-cloak>
+
+    <md-toolbar md-theme="default-dark">
+
+        <div class="md-toolbar-tools" layout="row">
+            <h3 style="margin-left: 2%;" flex="20">Submissions</h3>
+            <h4 style="margin-left: 2%" flex="25">By : {{ user }}</h4>
+            <h4 style="margin-left: 2%" flex="25">For Assignment: {{ assignment }}</h4>
+            <md-button style="min-height:60px; max-height: 60px;" class="md-raised md-hue-4" ng-click="sendAssignmentReview($event)" flex>Send Review Comment</md-button>
+
+        </div>
+
+
+    </md-toolbar>
+    <md-toolbar md-theme="notify" layout="row" class="md-warn" ng-if="!plagCheckCompleted && !plagCheckProgress">
+        <div class="md-toolbar-tools" flex="90">
+            <h5 style="margin-left: 2%;">Plagiarism Check has not been requested.</h5>
+        </div>
+        <md-button class="md-raised" ng-click="sendPlagiarismCheckRequest()" flex>Request</md-button>
+    </md-toolbar>
+
+    <md-toolbar md-theme="notify" ng-if="plagCheckCompleted" style="min-height: 25px; max-height: 25px;">
+        <div class="md-toolbar-tools">
+            <h5 style="margin-left: 2%;">Plagiarism Check has been completed.</h5>
+        </div>
+    </md-toolbar>
+    <md-toolbar md-theme="notify" class="md-accent" ng-if="plagCheckProgress" style="min-height: 25px; max-height: 25px;">
+        <div class="md-toolbar-tools">
+            <h5 style="margin-left: 2%;">Plagiarism Check is in progress.</h5>
+        </div>
+    </md-toolbar>
+    <hr/>
+        <!--table wrapper starts-->
+    <div class="table-responsive md-whiteframe-z2" layout-padding style="margin: 40px;">
+        <!-- Table starts here -->
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Problem ID</th>
+                <th>Submission ID</th>
+                <th>Problem Name</th>
+                <th>Time taken</th>
+                <th>Memory Taken</th>
+                <th>Submitted On</th>
+                <th>Points</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="row in problem track by $index" ng-click="gotoStudentProblem($index)">
+                <td>{{ row.problem_id }}</td>
+                <td>{{ row.id }}</td>
+                <td>{{ row.problem_name }}</td>
+                <td>{{ row.time_taken }} seconds</td>
+                <td>{{ row.memory_taken }} KB</td>
+                <td>{{ row.created_on }}</td>
+                <td>{{ row.score }} out of {{ row.points }}</td>
+
+            </tr>
+        </table>
+    </div><!--table wrapper ends-->
+</div>

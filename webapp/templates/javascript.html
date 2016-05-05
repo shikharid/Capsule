@@ -1,0 +1,45 @@
+<script src="{{ STATIC_URL }}js/libs/angular/angular.js"></script>
+<script src="{{ STATIC_URL }}js/libs/angular/underscore-min.js"></script>
+<script src="{{ STATIC_URL }}js/libs/angular/angular-route.js"></script>
+<script src="{{ STATIC_URL }}js/libs/angular/angular-cookies.js"></script>
+<script src="{{ STATIC_URL }}js/libs/angular/angular-animate.js"></script>
+<script src="{{ STATIC_URL }}js/libs/angular/restangular.js"></script>
+<script src="{{ STATIC_URL }}js/libs/angular/angular-aria.min.js"></script>
+<script src="{{ STATIC_URL }}js/libs/angular/angular-messages.min.js"></script>
+
+<script src="{{ STATIC_URL }}app/js/grad_dp.js"></script>
+<script src="{{ STATIC_URL }}app/js/loading-bar.min.js"></script>
+<script src="{{ STATIC_URL }}app/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Angular Material Library -->
+<script src="{{ STATIC_URL }}js/libs/angular/angular-material.min.js"></script>
+
+<script type="text/javascript" src="{{ STATIC_URL }}app/app.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/constants.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/appConfig.js"></script>
+
+<!--App Services-->
+<script type="text/javascript" src="{{ STATIC_URL }}app/services/authentication-service.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/services/spoj-service.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/services/assignment-service.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/services/problem-service.js"></script>
+{% if user.is_faculty %}
+<script type="text/javascript" src="{{ STATIC_URL }}app/services/faculty-assignment-service.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/services/faculty-problem-service.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/services/faculty-testcase-service.js"></script>
+{% endif %}
+
+<!--App controllers-->
+<script type="text/javascript" src="{{ STATIC_URL }}app/controllers/login-controller.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/controllers/logout-controller.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/controllers/editor-controller.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/controllers/pending-list-controller.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/controllers/problem-list-controller.js"></script>
+
+{% if user.is_faculty %}
+<script type="text/javascript" src="{{ STATIC_URL }}app/controllers/faculty-assignment-controller.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/controllers/add-assignment-controller.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/controllers/edit-assignment-controller.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/controllers/faculty-problem-controller.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}app/controllers/faculty-testcase-controller.js"></script>
+{% endif %}

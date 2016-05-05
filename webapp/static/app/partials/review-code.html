@@ -1,0 +1,103 @@
+<style xmlns="http://www.w3.org/1999/html">
+    .main-fab {
+      position:absolute;
+      z-index:200;
+      font-size:30px;
+      left:240px;
+      transform:scale(.88,.88);
+    }
+    a:focus, a:hover {
+        text-decoration: none;
+        border: none;
+    }
+    .table td {
+        border-top: none !important;
+     }
+    .table tr {
+        min-height: 65px;
+        text-align: center;
+        font-size: 1.2em;
+        height: 65px;
+    }
+
+    .table>thead>tr>th {
+        text-align: center;
+        font-weight: 400;
+        vertical-align: bottom;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    }
+</style>
+<div ng-controller="reviewStudentSubmissionController" flex ng-cloak>
+
+    <md-toolbar md-theme="default-dark">
+
+        <div class="md-toolbar-tools" layout="row">
+            <h3 style="margin-left: 2%;" flex="20">Submission for {{ problemName }}</h3>
+            <h4 style="margin-left: 2%" flex="20">By : {{ user }}</h4>
+            <h4 style="margin-left: 2%" flex="20">For Assignment: {{ assignment }}</h4>
+            <h5 style="margin-left: 2%" flex="15">Score: {{ score }}</h5>
+            <md-button style="min-height:60px; max-height: 60px;" class="md-raised md-hue-4" ng-click="sendSubmissionReview($event)" flex>Send Review Comment</md-button>
+
+        </div>
+
+
+    </md-toolbar>
+    <md-toolbar md-theme="notify" layout="row" class="md-warn" ng-if="!plagCheckCompleted && !plagCheckProgress">
+        <div class="md-toolbar-tools" flex="90">
+            <h5 style="margin-left: 2%;">Plagiarism Check has not been requested.</h5>
+        </div>
+        <md-button class="md-raised" ng-click="sendPlagiarismCheckRequest()" flex>Request</md-button>
+    </md-toolbar>
+
+    <md-toolbar md-theme="notify" ng-if="plagCheckCompleted" style="min-height: 25px; max-height: 25px;">
+        <div class="md-toolbar-tools">
+            <h5 style="margin-left: 2%;">Plagiarism Check has been completed.</h5>
+        </div>
+    </md-toolbar>
+    <md-toolbar md-theme="notify" class="md-accent" ng-if="plagCheckProgress" style="min-height: 25px; max-height: 25px;">
+        <div class="md-toolbar-tools">
+            <h5 style="margin-left: 2%;">Plagiarism Check is in progress.</h5>
+        </div>
+    </md-toolbar>
+    <hr/>
+    <md-toolbar md-theme="code-dark" class="md-primary" ng-if="plagCheckCompleted" style="min-height: 25px; max-height: 25px;">
+        <div class="md-toolbar-tools" class="md-primary">
+            Student {{ user }} solution had a {{ match }}% match with student  {{ res.caughtWith.member_id }}
+        </div>
+    </md-toolbar>
+    <md-toolbar md-theme="code-dark" class="md-warn" ng-if="plagCheckCompleted" style="min-height: 25px; max-height: 25px;">
+        <div class="md-toolbar-tools">
+            This could be a false positive.
+        </div>
+    </md-toolbar>
+    <md-toolbar md-theme="code-dark" class="md-primary md-whiteframe-24dp" ng-if="plagCheckCompleted" style="min-height: 25px; max-height: 25px;">
+        <div class="md-toolbar-tools">
+            Review the solutions and change Student's score if necessary. Changed score can be from 0 to {{ res.caughtWith.points }} for the problem
+        </div>
+    </md-toolbar>
+    <hr/>
+    <hr/>
+    <div md-theme="code-dark" layout="row" class="md-primary md-whiteframe-4dp" ng-if="plagCheckCompleted">
+        <div class="md-primary md-whiteframe-24dp" flex="45">
+                <pre style="min-height: 400px;">
+                    <code>Student {{ user }}'s code </code><br/>
+                    {{ res.submission.code }}
+                </pre>
+        </div>
+        <div class="md-primary md-whiteframe-24dp" flex="45">
+            <pre style="min-height: 400px;">
+                Matched Code <br/>
+                {{ res.caughtWith.code }}
+            </pre>
+        </div>
+        <md-content flex>
+            <md-input-container class="md-primary" style="margin-top: 100%;">
+                <span> <strong>Score: </strong></span>
+                <input type="number" min="0" max="{{ points }}"ng-model="score" aria-label="change score">
+                <md-button class="md-raised md-primary" ng-click="reduceProblemScore(score)" style="max-height: 25px;" md-theme="default-form">
+                Change</md-button>
+            </md-input-container>
+        </md-content>
+    </div>
+    <hr/>
+</div>

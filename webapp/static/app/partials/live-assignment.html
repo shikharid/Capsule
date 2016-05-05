@@ -1,0 +1,64 @@
+
+<style>
+    .main-fab {
+      position:absolute;
+      z-index:200;
+      font-size:30px;
+      left:240px;
+      transform:scale(.88,.88);
+    }
+    a:focus, a:hover {
+        text-decoration: none;
+        border: none;
+    }
+    .table td {  
+        border-top: none !important;
+     }
+    .table tr {
+        min-height: 65px;
+        text-align: center;
+        font-size: 1.2em;
+        height: 65px;
+    }
+
+    .table>thead>tr>th {
+        text-align: center;
+        font-weight: 400;
+        vertical-align: bottom;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    }
+</style>
+<div ng-controller="assignmentFacultyController" flex ng-cloak>
+
+    <div class="main-fab" md-theme="default-dark" flex-offset="70">
+        <md-button class="md-fab md-accent" title="Add New Assignment" ng-href="assignment/add/" style="margin-top:30px;font-size: 0.9em;">+</md-button>
+    </div>
+    <md-toolbar md-theme="default-dark">
+
+        <div class="md-toolbar-tools">
+            <h3 style="margin-left: 2%;">Assignments</h3>
+        </div>
+
+
+    </md-toolbar>
+
+
+        <!--table wrapper starts-->
+    <div class="table-responsive md-whiteframe-z2" layout-padding style="margin: 40px;">
+        <!-- Table starts here -->
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Deadline</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="row in assignment" ng-click="gotoAssignment($index)">
+                <td><a href="#">{{ row.id }}</a></td>
+                <td>{{ row.name }}</td>
+                <td>{{ row.deadline }}</td>
+            </tr>
+        </table>
+    </div><!--table wrapper ends-->
+</div>

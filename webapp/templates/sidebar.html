@@ -1,0 +1,87 @@
+{% if not user.is_faculty %}
+<div flex="20">
+<section layout="row" md-theme="default">
+    <md-sidenav style="min-height: 140vh;" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+      <md-toolbar>
+        <!--h1 class="md-toolbar-tools">Sidenav Left</h1!-->
+          <div class="column" class="md-toolbar-tools" id="gradient">
+            <md-grid-list md-cols="2" md-gutter="2px" md-row-height="150px">
+                <md-grid-tile>
+                  <md-icon md-font-library="material-icons" style="color:#dcedc8;font-size:65px;">
+                      face
+                  </md-icon>
+                </md-grid-tile>
+                <md-grid-tile>
+                    <md-chips>
+                        <md-chip>{{ user.first_name|capfirst }}</md-chip>
+                        <hr/>
+                        <md-chip>{{ user.member_id|capfirst }}</md-chip>
+                    </md-chips>
+                </md-grid-tile>
+            </md-grid-list>
+          </div>
+      </md-toolbar>
+      <md-content layout-padding>
+        <md-list>
+        <md-list-item href="pending-assignment/" style="font-size: 0.85em">
+            <md-icon md-font-library="material-icons">send</md-icon>
+            <p> Pending Assignments </p>
+        </md-list-item>
+        <md-list-item href="completed-assignment/" style="font-size: 0.8em">
+            <md-icon md-font-library="material-icons">send</md-icon>
+            <p> Completed Assignments </p>
+        </md-list-item>
+        <md-list-item href="ranklist/" style="font-size: 0.85em">
+            <md-icon md-font-library="material-icons">send</md-icon>
+            <p> Ranklist </p>
+        </md-list-item>
+        <md-list-item href="submissions/" style="font-size: 0.85em">
+            <md-icon md-font-library="material-icons">send</md-icon>
+            <p> Submissions </p>
+        </md-list-item>
+        <md-list-item href="editor/" style="font-size: 0.85em">
+            <md-icon md-font-library="material-icons">send</md-icon>
+            <p> Code Editor </p>
+        </md-list-item>
+        <md-list-item href="logout/" style="font-size: 0.85em">
+            <md-icon md-font-library="material-icons">send</md-icon>
+            <p> Logout </p>
+        </md-list-item>
+        </md-list>
+      </md-content>
+    </md-sidenav>
+  </section>
+</div>
+{% else %}
+    <div flex="5">
+        <section layout="row" md-theme="default">
+            <md-sidenav style="min-height: 140vh;" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
+                <md-content>
+                    <md-list>
+                        <md-list-item  md-ink-ripple>
+                            <a href="assignment/">
+                                <md-icon md-font-library="material-icons" aria-label="Live Assignments" title="Live Assignments">assignment</md-icon>
+                            </a>
+                        </md-list-item>
+                        <md-list-item  md-ink-ripple>
+                            <a href="review/">
+                                <md-icon md-font-library="material-icons" aria-label="Evaluate Assignments" title="Evaluate Assignments">assessment</md-icon>
+                            </a>
+                        </md-list-item>
+                        <md-list-item md-ink-ripple>
+                            <a href="editor/">
+                                <md-icon md-font-library="material-icons" aria-label="Code Editor" title="Code Editor">mode_edit</md-icon>
+                            </a>
+                        </md-list-item>
+                        <md-list-item md-ink-ripple>
+                            <a href="logout/">
+                                <md-icon md-font-library="material-icons" aria-label="Logout" title="Logout">exit_to_app</md-icon>
+                            </a>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-sidenav>
+        </section>
+    </div>
+
+{% endif %}
